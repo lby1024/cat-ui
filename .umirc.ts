@@ -5,7 +5,7 @@ export default defineConfig({
   favicon: '/images/cat1.png',
   logo: '/images/cat1.png',
   outputPath: 'docs-dist',
-  base: `/testui/`,
-  publicPath: `/testui/`,
+  base: `/cat-ui/`,
+  publicPath: `/cat-ui/`,
   // more config: https://d.umijs.org/config
 });
