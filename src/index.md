@@ -1,0 +1,6 @@
+
+## quick startttt
+
+```
+npm 
+```
