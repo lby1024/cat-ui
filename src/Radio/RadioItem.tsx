@@ -4,9 +4,23 @@ import './index.css';
 
 interface RadioItemProps {
   className?: string;
+  /**
+   * 指定当前是否选中
+   * @default false
+   */
   checked?: boolean;
+  /**
+   * 禁用 Radio
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * 根据 value 进行比较，判断是否选中
+   */
   value?: string;
+  /**
+   * 选项变化时的回调函数
+   */
   onChange?: (e: string) => void;
   children?: ReactNode;
 }

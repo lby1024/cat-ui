@@ -2,9 +2,16 @@ import React, { FC, ReactElement, useState } from 'react';
 import RadioItem from './RadioItem';
 
 interface radioGroupProps {
+  className?: string;
+  /**
+   * @description 用于设置当前选中的值
+   */
   value?: string;
-  children?: ReactElement;
+  /**
+   * @description 选项变化时的回调函数
+   */
   onChange?: (v: string) => void;
+  children?: ReactElement;
 }
 
 const RadioGroup: FC<radioGroupProps> = (props) => {
@@ -29,7 +36,7 @@ const RadioGroup: FC<radioGroupProps> = (props) => {
     }
   }
 
-  return <span>{newChildren}</span>;
+  return <span className={props.className}>{newChildren}</span>;
 };
 
 export default RadioGroup;
