@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC, FormEvent, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import './index.css';
 
 interface RadioItemProps {

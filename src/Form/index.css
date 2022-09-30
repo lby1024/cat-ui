@@ -1,0 +1,21 @@
+.cat-form {
+  
+}
+
+.cat-form-item {
+  display: flex;
+}
+.cat-form-label {
+  text-align: right;
+  flex: 8;
+  padding: 0 12px;
+}
+.cat-form-right {
+  flex: 16
+}
+.cat-form-msg {
+  color: red;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+}
