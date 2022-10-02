@@ -10,21 +10,21 @@ export default function useForm() {
   const formRules = useRef<FormRules>({});
   const validator = useRef<Validator | null>(null);
 
-  // {username} --> {username, password}
+  // formErrors: {username} --> {username, password}
   function setFormItemError(name: string, formItemErrors: string[]) {
     setformErrors((errs) => {
       errs[name] = formItemErrors;
       return { ...errs };
     });
   }
-  // {username, password} --> {username}
+  // formErrors: {username, password} --> {username}
   function clearFormItemError(name: string) {
     setformErrors((errs) => {
       delete errs[name];
       return { ...errs };
     });
   }
-  // {} --> {username: undefind}
+  // values: {} --> {username: undefind}
   function valuesAddName(name: string) {
     setValues((v) => {
       v[name] = undefined;
@@ -51,7 +51,11 @@ export default function useForm() {
       }
       return currentValues;
     },
-
+    /**
+     *
+     * values: {} -> {user: undefind}
+     * formRules: {} -> {user: [{required: true}]}
+     */
     regist(name?: string, formItemRules?: FormItemRule[]) {
       if (name) {
         valuesAddName(name);
@@ -67,7 +71,10 @@ export default function useForm() {
         return { ...v, ...values };
       });
     },
-
+    /**
+     * 无误: 清除之前错误信息
+     * 有误: 更新错误信息
+     */
     async validateItem(name?: string, values?: Obj) {
       if (!name || !values) {
         return values;
@@ -84,7 +91,10 @@ export default function useForm() {
         throw errors;
       }
     },
-
+    /**
+     * 有误: 更新error并 reject(error)
+     * 无误: resolve(values)
+     */
     async validate() {
       if (!validator.current) {
         validator.current = new Validator(formRules.current);

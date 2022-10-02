@@ -1,0 +1,55 @@
+.cat-button {
+  display: inline-block;
+  font-size: var(--font);
+  line-height: 1.5em;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 4px 15px;
+  border-radius: 2px;
+  box-shadow: 0 2px #0000000b;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.645,.045,.355,1);
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+.cat-button:hover {
+  opacity: .8;
+}
+.cat-btn-disabled {
+  opacity: .39;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.cat-btn-lg {
+  padding: 6.4px 15px;
+  font-size: var(--font-lg )
+}
+.cat-btn-sm {
+  padding: 0 7px;
+}
+.cat-btn-default {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid var(--gray);
+}
+.cat-btn-default:hover {
+  border: 1px solid var(--blue);
+  color: var(--blue);
+}
+.cat-btn-pramiry {
+  background-color: var(--blue);
+  color: #fff;
+  border: 1px solid transparent;
+}
+.cat-btn-danger {
+  background-color: var(--red);
+  color: #fff;
+  border: 1px solid transparent;
+}
+.cat-btn-link {
+  background-color: #fff;
+  color: var(--blue);
+  border: 1px solid transparent;
+  box-shadow: none;
+}
