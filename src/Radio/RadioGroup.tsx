@@ -15,7 +15,7 @@ interface radioGroupProps {
 }
 
 const RadioGroup: FC<radioGroupProps> = (props) => {
-  const { children } = props;
+  const { children, className } = props;
   const [value, setValue] = useState(props.value);
 
   const newChildren = React.Children.map(children, (child) => {
@@ -36,7 +36,7 @@ const RadioGroup: FC<radioGroupProps> = (props) => {
     }
   }
 
-  return <span className={props.className}>{newChildren}</span>;
+  return <span className={className}>{newChildren}</span>;
 };
 
 export default RadioGroup;

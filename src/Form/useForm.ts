@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Obj } from '../tools/type';
 import Validator, { FormErrors, FormItemRule, FormRules } from './valitate';
 
-export const FormContext = React.createContext(useForm());
+export const FormContext = React.createContext<any>(null);
 
 export default function useForm() {
   const [values, setValues] = useState<Obj>({});

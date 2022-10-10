@@ -9,10 +9,7 @@ interface CCCProps {
 const CCC: FC<CCCProps> = (props) => {
   const { className } = props;
 
-  const clas = classNames({
-    'cat-ccc': true,
-    [className as string]: !!className,
-  });
+  const clas = classNames('cat-ccc', className, {});
 
   return <div>CCC</div>;
 };
