@@ -1,57 +1,50 @@
 import classNames from 'classnames';
-import React, { CSSProperties, FC, ReactElement, ReactNode } from 'react';
-import './index.css';
-import { MenuItemProps } from './MenuItem';
+import React, { CSSProperties, FC, ReactNode } from 'react';
 import { SubMenuProps } from './SubMenu';
+import './index.css';
 import { MenuContext, useMenu } from './useMenu';
 
-export type ModeType = 'inline' | 'vertical' | 'horizon';
-
-interface MenuGroupProps {
+export type MenuModeType = 'inline' | 'vertical' | 'horizon';
+export interface MenuProps {
   className?: string;
   children?: ReactNode;
-  defaultPath?: string;
   style?: CSSProperties;
+  inlineIndent?: number; // inline 模式的菜单缩进宽度
   onSelect?: Function;
-  mode?: ModeType;
+  mode?: MenuModeType;
 }
 
-const MenuGroup: FC<MenuGroupProps> = (props) => {
-  const { className, children, style, onSelect, defaultPath, mode } = props;
-  const newChildren = getNewChildren(children, mode);
+const Menu: FC<MenuProps> = (props) => {
+  const { className, children, style, inlineIndent, mode } = props;
   const clas = classNames('cat-menu', className, {
     'cat-menu-horizon': mode === 'horizon',
   });
-  const menuContext = useMenu({
-    defaultPath,
-    onSelect,
-    mode,
-  });
+  const menuContext = useMenu(props);
+
+  function newChildren() {
+    return React.Children.map(children, (c, i) => {
+      const child = c as React.FunctionComponentElement<SubMenuProps>;
+
+      return React.cloneElement(child, {
+        padding: inlineIndent,
+        name: child.props.name || String(i),
+        path: child.props.name || String(i),
+        mode: child.props.mode || mode,
+        lv: 1,
+      });
+    });
+  }
 
   return (
     <MenuContext.Provider value={menuContext}>
       <ul className={clas} style={style}>
-        {newChildren}
+        {newChildren()}
       </ul>
     </MenuContext.Provider>
   );
 };
-MenuGroup.defaultProps = {
+Menu.defaultProps = {
+  inlineIndent: 20,
   mode: 'inline',
 };
-export default MenuGroup;
-
-function getNewChildren(children: ReactNode, mode?: ModeType) {
-  return React.Children.map(children, (c, i) => {
-    const child = c as React.FunctionComponentElement<SubMenuProps>;
-    const { displayName } = child.type;
-    if (displayName === 'SubMenu' || displayName === 'MenuItem') {
-      return React.cloneElement(child, {
-        name: child.props.name || String(i),
-        path: child.props.name || String(i),
-        mode: child.props.mode || mode,
-      });
-    }
-    console.error('Menu的child必须是MenuItem或SubMenu');
-  });
-}
+export default Menu;

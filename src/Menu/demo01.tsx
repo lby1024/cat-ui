@@ -5,26 +5,27 @@
 
 import { Menu } from '../index';
 
-const Demo01 = () => {
+const App = () => {
   function onSelect(res: any) {
     console.log(res);
   }
 
-  const style = { width: 250, height: '30vh' };
-
   return (
-    <Menu onSelect={onSelect} style={style} mode="vertical">
-      <Menu.Item>首页</Menu.Item>
-      <Menu.Sub title="成员">
-        <Menu.Item>老板</Menu.Item>
-        <Menu.Sub title="店长">
-          <Menu.Item>小张</Menu.Item>
-          <Menu.Item>小赵</Menu.Item>
-        </Menu.Sub>
+    // <Menu style={{ width: 'auto' }} onSelect={onSelect} mode="horizon">
+    // <Menu style={{ width: 250 }} onSelect={onSelect} mode="vertical">
+    <Menu style={{ width: 250 }} onSelect={onSelect} mode="inline">
+      <Menu.Item>quick start</Menu.Item>
+      <Menu.Sub title="布局">
+        <Menu.Item>divider</Menu.Item>
+        <Menu.Item>grid</Menu.Item>
       </Menu.Sub>
-      <Menu.Item>资金</Menu.Item>
+      <Menu.Sub title="通用">
+        <Menu.Item>button</Menu.Item>
+        <Menu.Item>icon</Menu.Item>
+      </Menu.Sub>
+      <Menu.Item>其他</Menu.Item>
     </Menu>
   );
 };
 
-export default Demo01;
+export default App;

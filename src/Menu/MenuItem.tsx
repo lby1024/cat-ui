@@ -1,38 +1,45 @@
 import classNames from 'classnames';
-import React, { FC, useContext } from 'react';
-import { ModeType } from './MenuGroup';
-import { MenuContext, useLv } from './useMenu';
+import { FC, ReactNode, useContext, useMemo } from 'react';
+import { MenuModeType } from './MenuGroup';
+import { MenuContext } from './useMenu';
 
-export interface MenuItemProps extends React.HTMLAttributes<HTMLElement> {
+interface MenuItemProps {
   className?: string;
+  children?: ReactNode;
+  padding?: number;
   name?: string;
   path?: string;
-  mode?: ModeType;
+  mode?: MenuModeType;
+  lv?: number;
 }
 
 const MenuItem: FC<MenuItemProps> = (props) => {
-  const { children, className, path, mode } = props;
-  const lv = useLv(path);
-  const { curPath, setPath } = useContext(MenuContext);
+  const { className, children, padding, path, mode, lv } = props;
+  const menuContext = useContext(MenuContext);
+  const isCur = menuContext.curPath === path;
   const clas = classNames('cat-menu-item', className, {
-    'cat-menu-cur-bg': curPath === path,
-    'cat-menu-cur-right': mode === 'inline' && lv === 1 && curPath === path,
-    'cat-menu-cur-bottom': mode === 'horizon' && lv === 1 && curPath === path,
+    'cat-menu-cur-right': mode === 'inline' && isCur,
+    'cat-menu-cur-bg': curBg(),
+    'cat-menu-cur-bottom': mode === 'horizon' && lv === 1 && isCur,
   });
 
-  function click() {
-    if (!setPath) return;
-    setPath(path);
+  function curBg() {
+    if (menuContext.curPath === path) {
+      if (mode === 'vertical') return true;
+      if (mode === 'horizon' && lv! > 1) return true;
+    }
+    return false;
   }
 
-  const style = mode === 'inline' ? { paddingLeft: 20 * lv } : {};
+  function click() {
+    menuContext.setCurPath(path!);
+  }
 
   return (
-    <li className={clas} style={style} onClick={click}>
+    <li className={clas} style={{ paddingLeft: padding }} onClick={click}>
       {children}
     </li>
   );
 };
-MenuItem.displayName = 'MenuItem';
 
 export default MenuItem;

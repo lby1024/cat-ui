@@ -5,72 +5,69 @@
   display: flex;
 }
 .cat-menu-item {
-  height: 3em;
   display: flex;
   align-items: center;
+  height: 3em;
   padding: 0 20px;
 }
 .cat-menu-item:hover {
-  cursor: pointer;
   color: var(--blue);
 }
-.cat-sub {
+.cat-submenu {
   position: relative;
 }
-.cat-sub-title {
-  height: 3em;
+.cat-submenu-list {
+  display: none;
+  background-color: #fafafa;
+}
+.cat-submenu-list-shadow {
+  box-shadow: 0 3px 6px -4px #0000001f,0 6px 16px #00000014,0 9px 28px 8px #0000000d;
+  background-color: #fff;
+  border-radius: 3%;
+  z-index: 999;
+}
+.cat-submenu-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 3em;
   padding: 0 20px;
 }
-.cat-sub-title:hover {
+.cat-submenu-title:hover {
   color: var(--blue);
 }
-.cat-sub-list {
-  display: none;
-  width: 100%;
-}
-/* 选中时的四种样式 */
-.cat-menu-cur-txt {
-  color: var(--blue);
-}
-.cat-menu-cur-bg {
+/* 高亮样式 */
+.cat-menu-cur-right {
+  border-right: 3px solid var(--blue);
   color: var(--blue);
   background-color: #e6f7ff;
 }
-.cat-menu-cur-right {
+.cat-menu-cur-txt {
   color: var(--blue);
-  border-right: 2px solid var(--blue);
-  background-color: #fff;
 }
 .cat-menu-cur-bottom {
-  color: var(--blue);
   border-bottom: 2px solid var(--blue);
-  background-color: #fff;
+  color: var(--blue);
 }
-/* sub-list 显示的三种方式 */
-.cat-show-vertical{
+.cat-menu-cur-bg {
+  background-color: #e6f7ff;
+  color: var(--blue);
+}
+/* 显示方式 */
+.cat-menu-show-inline {
+  display: block;
+}
+.cat-menu-show-right {
   display: block;
   position: absolute;
-  top: 0;
   left: 103%;
-  box-shadow: 0 3px 6px -4px #0000001f,0 6px 16px #00000014,0 9px 28px 8px #0000000d;
-  background-color: #fff;
-  border-radius: 6px;
-  z-index: 999;
+  top: 0;
+  width: 100%;
 }
-.cat-show-inline{
-  display: block;
-  background-color: #fafafa;
-}
-.cat-show-horizon{
+.cat-menu-show-bottom {
   display: block;
   position: absolute;
-  top: 103%;
   left: 0;
-  box-shadow: 0 3px 6px -4px #0000001f,0 6px 16px #00000014,0 9px 28px 8px #0000000d;
-  background-color: #fff;
-  border-radius: 6px;
-  z-index: 999;
+  top: 103%;
+  width: 100%;
 }

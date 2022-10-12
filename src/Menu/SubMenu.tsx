@@ -1,49 +1,62 @@
 import classNames from 'classnames';
-import React, { FC, ReactNode, useContext, useRef, useState } from 'react';
-import { ModeType } from './MenuGroup';
-import { MenuContext, useLv } from './useMenu';
+import React, { useContext, useRef, useState } from 'react';
+import { FC, ReactNode } from 'react';
+import { MenuModeType } from './MenuGroup';
+import { MenuContext } from './useMenu';
 
-export interface SubMenuProps extends React.HTMLAttributes<HTMLElement> {
+export interface SubMenuProps {
   className?: string;
+  children?: ReactNode;
   title?: string;
-  path?: string;
+  padding?: number;
   name?: string;
-  mode?: ModeType;
+  path?: string;
+  mode?: MenuModeType;
+  lv?: number;
 }
 
 const SubMenu: FC<SubMenuProps> = (props) => {
-  const { title, path, className, children, mode } = props;
-  const newChildren = getNewChildren(children, props);
-  const lv = useLv(path);
+  const { className, children, title, padding, path, mode, lv } = props;
   const menuContext = useContext(MenuContext);
-  const clas = classNames('cat-sub', className);
-  const { show, onClick, clickHide, ...hover } = useShow(props);
-  const titleClass = classNames('cat-sub-title', {
-    'cat-menu-cur-txt': isCur() && mode !== 'horizon',
-    'cat-menu-cur-bottom': isCur() && mode === 'horizon',
+  const clas = classNames('cat-submenu', className);
+  const { onClick, show, ...hover } = useShow(props);
+  const titleClass = classNames('cat-submenu-title', {
+    'cat-menu-cur-txt': isCur(menuContext.curPath, path!),
+    'cat-menu-cur-bottom': isCur(menuContext.curPath, path!) && mode === 'horizon' && lv === 1,
   });
-  const listClass = classNames('cat-sub-list', {
-    'cat-show-vertical': mode === 'vertical' && show,
-    'cat-show-inline': mode == 'inline' && show,
-    'cat-show-horizon': mode === 'horizon' && show,
+  const listClass = classNames('cat-submenu-list', {
+    'cat-menu-show-inline': mode === 'inline' && show,
+    'cat-menu-show-right': mode === 'vertical' && show,
+    'cat-menu-show-bottom': mode === 'horizon' && show,
+    'cat-submenu-list-shadow': mode !== 'inline',
   });
 
-  function isCur() {
-    if (path && menuContext.curPath) {
-      return menuContext.curPath.includes(path);
-    }
-    return false;
+  function newChildren() {
+    const padding = props.padding || 0;
+
+    return React.Children.map(children, (c, i) => {
+      const child = c as React.FunctionComponentElement<SubMenuProps>;
+      const name = child.props.name || String(i);
+      const paddingLeft = mode === 'inline' ? padding + menuContext.inlineIndent : padding;
+
+      return React.cloneElement(child, {
+        padding: paddingLeft,
+        name,
+        path: `${path}-${name}`,
+        mode: child.props.mode || mode,
+        lv: lv! + 1,
+      });
+    });
   }
 
-  const style = mode === 'inline' ? { paddingLeft: 20 * lv } : {};
-
   return (
-    <div className={clas} {...hover} onClick={clickHide}>
-      <div className={titleClass} style={style} onClick={onClick}>
+    <div className={clas} {...hover}>
+      <div className={titleClass} style={{ paddingLeft: padding }} onClick={onClick}>
         <span>{title}</span>
-        {mode !== 'horizon' && <Arrow show={show} />}
+        {mode === 'inline' && <span>{show ? '△' : '▽'}</span>}
+        {mode === 'vertical' && <span>{'▷'}</span>}
       </div>
-      <ul className={listClass}>{newChildren}</ul>
+      <ul className={listClass}>{newChildren()}</ul>
     </div>
   );
 };
@@ -51,64 +64,44 @@ SubMenu.displayName = 'SubMenu';
 export default SubMenu;
 
 function useShow(props: SubMenuProps) {
-  const { mode } = props;
   const [show, setShow] = useState(false);
   const timer = useRef<any>(null);
 
-  function onClick() {
-    if (mode !== 'inline') return;
-    setShow(!show);
-  }
-
-  function onMouseEnter() {
-    if (mode === 'inline') return;
-    if (timer.current) {
-      clearTimeout(timer.current);
-      timer.current = null;
-    }
-    setShow(true);
-  }
-
-  function onMouseLeave() {
-    if (mode === 'inline') return;
-    timer.current = setTimeout(() => {
-      setShow(false);
-    }, 250);
-  }
-
-  function clickHide(e: any) {
-    if (mode === 'inline') return;
-    if (e.target.tagName === 'LI') {
-      setShow(false);
-    }
-  }
-
   return {
     show,
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
-    clickHide,
+
+    onClick() {
+      if (props.mode === 'inline') {
+        setShow(!show);
+      }
+    },
+
+    onMouseEnter() {
+      if (props.mode === 'vertical' || props.mode === 'horizon') {
+        timer.current && clearTimeout(timer.current);
+        setShow(true);
+      }
+    },
+
+    onMouseLeave() {
+      if (props.mode === 'vertical' || props.mode === 'horizon') {
+        timer.current = setTimeout(() => setShow(false), 150);
+      }
+    },
   };
 }
-
-function getNewChildren(children: ReactNode, props: SubMenuProps) {
-  return React.Children.map(children, (c, i) => {
-    const child = c as React.FunctionComponentElement<SubMenuProps>;
-    const { displayName } = child.type;
-    if (displayName === 'SubMenu' || displayName === 'MenuItem') {
-      let name = child.props.name || String(i);
-      let m = props.mode === 'horizon' ? 'vertical' : props.mode;
-      return React.cloneElement(child, {
-        name,
-        path: `${props.path}-${name}`,
-        mode: child.props.mode || m,
-      });
-    }
-    console.error('Menu的child必须是MenuItem或SubMenu');
-  });
+/**
+ *
+ * return true 的条件
+ * 1: path 长度小于 curPath
+ * 2: path 与 curPath 一一对应
+ */
+function isCur(curPath: string, path: string) {
+  const cur = curPath.split('-');
+  const p = path.split('-');
+  if (p.length > cur.length) return false;
+  for (let i = 0; i < p.length; i++) {
+    if (cur[i] !== p[i]) return false;
+  }
+  return true;
 }
-
-const Arrow = (props: { show: boolean }) => {
-  return <span>{props.show ? '👇' : '👈'}</span>;
-};

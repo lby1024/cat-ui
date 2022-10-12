@@ -1,43 +1,27 @@
-import React, { useMemo, useState } from 'react';
-import { ModeType } from './MenuGroup';
+import React, { useState } from 'react';
+import { MenuProps } from './MenuGroup';
 
-interface useMemoProps {
-  defaultPath?: string;
-  onSelect?: Function;
-  mode?: ModeType;
-}
+export function useMenu(props: MenuProps) {
+  const { onSelect, inlineIndent } = props;
+  const [curPath, setPath] = useState('0');
 
-export function useMenu(props: useMemoProps) {
-  const [cur, setCur] = useState('0');
-
-  function setPath(path?: string) {
-    if (!path) return;
-    setCur(path);
-    if (!props.onSelect) return;
-    props.onSelect({
-      name: path.split('-').pop(),
-      path,
-    });
+  function setCurPath(path: string) {
+    setPath(path);
+    if (!onSelect) return;
+    const name = path.split('-').pop();
+    onSelect({ name, path });
   }
 
   return {
-    curPath: cur,
-    setPath,
-    mode: props.mode,
+    inlineIndent: inlineIndent || 20,
+    curPath,
+    setCurPath,
   };
 }
 
-type useMenuReturn = ReturnType<typeof useMenu>;
-type IMenuContext = Partial<useMenuReturn>;
-export const MenuContext = React.createContext<IMenuContext>({});
-
-export function useLv(path?: string) {
-  const lv = useMemo(() => {
-    if (path) {
-      return path.split('-').length;
-    }
-    return 1;
-  }, [path]);
-
-  return lv;
-}
+type useMenuRetury = ReturnType<typeof useMenu>;
+export const MenuContext = React.createContext<useMenuRetury>({
+  inlineIndent: 20,
+  curPath: '0',
+  setCurPath: () => {},
+});
