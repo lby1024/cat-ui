@@ -1,12 +1,3 @@
 # CCC
 
-```tsx
-/**
- * title: 基础
- * desc: 最简单的用法。
- */
-import React from 'react';
-import { CCC } from '../index';
-
-export default () => <CCC />;
-```
+<code src='./demo.tsx'></code>
