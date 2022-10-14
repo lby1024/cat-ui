@@ -8,28 +8,31 @@ import { Input, Icon } from '../index';
 const style: CSSProperties = { width: 300 };
 
 const App = () => {
-  const span = <div style={{ height: 12 }}></div>;
-
   return (
     <>
       <Input addOnBeefore="http://" addOnAfter=".com" defaultValue="cat-ui" style={style} />
-      {span}
+      <br />
+      <br />
       <Input
         addOnBeefore="https://"
         addOnAfter={<Icon name="search" />}
         defaultValue="cat-ui"
+        maxLength={10}
         style={style}
       />
-      {span}
+      <br />
+      <br />
       <Input
         style={style}
         suffix={<Icon name="mic" />}
         addOnAfter={<Icon name="search" />}
         placeholder="placeholder..."
       />
-      {span}
+      <br />
+      <br />
       <Input prefix="http://" defaultValue="cat-ui" suffix=".com" style={style} />
-      {span}
+      <br />
+      <br />
       <Input
         prefix={<Icon name="RectangleCopy1" size="21" />}
         placeholder="user name"

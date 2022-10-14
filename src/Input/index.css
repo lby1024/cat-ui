@@ -4,6 +4,7 @@
   border: 1px solid var(--gray);
   border-radius: 2px;
   width: 100%;
+  position: relative;
 }
 .cat-input-mid {
   display: inline-block;
@@ -51,4 +52,37 @@
 }
 .cat-input-suffix {
   padding-left: 0;
+}
+/* textarea */
+.cat-textarea {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  border: 1px solid var(--gray);
+  border-radius: 2px;
+}
+.cat-textarea textarea {
+  display: inline-block;
+  width: 100%;
+  padding: 4px 11px;
+  box-sizing: border-box;
+}
+.cat-textarea textarea::placeholder {
+  color: var(--gray);
+}
+.cat-textarea-count::after {
+  content: attr(data-count);
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  color: var(--gray);
+}
+.cat-area-fake {
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -999999;
+  z-index: -999999;
+  overflow-y: hidden;
 }

@@ -8,14 +8,14 @@ import { Input, Icon } from '../index';
 const style: CSSProperties = { width: 300 };
 
 const App = () => {
-  const span = <div style={{ height: 12 }}></div>;
-
   return (
     <>
       <Input prefix={<Icon name="search" />} placeholder="search..." size="large" style={style} />
-      {span}
+      <br />
+      <br />
       <Input prefix={<Icon name="search" />} placeholder="search..." style={style} />
-      {span}
+      <br />
+      <br />
       <Input prefix={<Icon name="search" />} placeholder="search..." size="small" style={style} />
     </>
   );
