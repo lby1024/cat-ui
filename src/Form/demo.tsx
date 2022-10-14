@@ -1,5 +1,4 @@
-import React from 'react';
-import { Form } from '../index';
+import { Form, Input, Button } from '../index';
 
 const initialValues = {
   username: 'jack',
@@ -31,16 +30,16 @@ export default () => {
   return (
     <Form onFinish={onFinish} onFinishFailed={onFinishFailed} initialValues={initialValues}>
       <Form.Item name="username" label="用户名" rules={rules.username} trigger="onBlur">
-        <input />
+        <Input />
       </Form.Item>
       <Form.Item name="password" label="密码" rules={rules.password}>
-        <input />
+        <Input />
       </Form.Item>
       <Form.Item name="repassword" label="重复密码" rules={rules.repassword}>
-        <input />
+        <Input />
       </Form.Item>
       <Form.Item>
-        <button>提交</button>
+        <Button>提交</Button>
       </Form.Item>
     </Form>
   );

@@ -1,9 +1,7 @@
 # Input
 
-### 基础
-```tsx
-import React from 'react';
-import {Input} from '../index'
+<code src='./demo.tsx'></code>
 
-export default () => <Input/>;
-```
+<code src='./demo02.tsx'></code>
+
+<code src='./demo03.tsx'></code>

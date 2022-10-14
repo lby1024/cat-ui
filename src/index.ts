@@ -1,5 +1,6 @@
 import './static/base.css';
-import './static/normalise.css';
+// import './static/normalise.css';
+import './static/reset.css';
 
 export { default as Radio } from './Radio';
 export { default as Input } from './Input';

@@ -12,6 +12,8 @@
   transition: all .3s cubic-bezier(.645,.045,.355,1);
   margin-right: 8px;
   margin-bottom: 12px;
+  background-color: #fff;
+  border: 1px solid var(--gray);
 }
 .cat-button:hover {
   opacity: .8;

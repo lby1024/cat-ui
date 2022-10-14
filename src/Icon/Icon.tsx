@@ -3,7 +3,7 @@ import React, { CSSProperties, FC } from 'react';
 import './index.css';
 import './iconfont.js';
 
-interface IconProps {
+export interface IconProps {
   name?: string;
   className?: string;
   color?: string;

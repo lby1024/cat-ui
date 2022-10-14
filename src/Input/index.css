@@ -1,3 +1,54 @@
 .cat-input {
-  
+  display:  inline-flex;
+  justify-content: space-between;
+  border: 1px solid var(--gray);
+  border-radius: 2px;
+  width: 100%;
+}
+.cat-input-mid {
+  display: inline-block;
+  justify-content: space-between;
+}
+.cat-input input {
+  box-sizing: border-box;
+  height: 32px;
+  padding: 4px 11px;
+  flex: auto;
+}
+.cat-input-large input {
+  height: 40px;
+}
+.cat-input-small input {
+  height: 24px;
+}
+.cat-input input::placeholder{
+  color: var(--gray);
+}
+.cat-input-label {
+  display: inline-flex;
+  align-items: center;
+  background-color: #fafafa;
+  padding: 0 11px;
+}
+.cat-input-left {
+  border-right: 1px solid var(--gray);
+}
+.cat-input-right {
+  border-left: 1px solid var(--gray);
+}
+.cat-input-mid {
+  flex: auto;
+  display: inline-flex;
+  align-items: stretch;
+}
+.cat-input-fix {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+}
+.cat-input-prefix {
+  padding-right: 0;
+}
+.cat-input-suffix {
+  padding-left: 0;
 }
