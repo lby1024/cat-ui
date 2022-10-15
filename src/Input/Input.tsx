@@ -8,7 +8,6 @@ interface InputProps extends Omit<NativeInputProps, 'size' | 'prefix'> {
   className?: string;
   disabled?: boolean;
   size?: 'large' | 'small' | 'default';
-  icon?: IconProps;
   addOnBeefore?: string | ReactElement;
   addOnAfter?: string | ReactElement;
   prefix?: string | ReactElement;
@@ -16,18 +15,8 @@ interface InputProps extends Omit<NativeInputProps, 'size' | 'prefix'> {
 }
 
 const Input: FC<InputProps> = (props) => {
-  const {
-    className,
-    disabled,
-    size,
-    icon,
-    addOnBeefore,
-    addOnAfter,
-    suffix,
-    prefix,
-    style,
-    ...others
-  } = props;
+  const { className, disabled, size, addOnBeefore, addOnAfter, suffix, prefix, style, ...others } =
+    props;
 
   const clas = classNames('cat-input', className, {
     'cat-input-diabled': disabled,
