@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { useContext, useRef, useState } from 'react';
 import { FC, ReactNode } from 'react';
+import Icon from '../Icon';
 import { MenuModeType } from './MenuGroup';
 import { MenuContext } from './useMenu';
 
@@ -53,8 +54,7 @@ const SubMenu: FC<SubMenuProps> = (props) => {
     <div className={clas} {...hover}>
       <div className={titleClass} style={{ paddingLeft: padding }} onClick={onClick}>
         <span>{title}</span>
-        {mode === 'inline' && <span>{show ? '△' : '▽'}</span>}
-        {mode === 'vertical' && <span>{'▷'}</span>}
+        <Arrow mode={mode} show={show} />
       </div>
       <ul className={listClass}>{newChildren()}</ul>
     </div>
@@ -104,4 +104,24 @@ function isCur(curPath: string, path: string) {
     if (cur[i] !== p[i]) return false;
   }
   return true;
+}
+
+interface ArrowProps {
+  mode: SubMenuProps['mode'];
+  show: boolean;
+}
+
+function Arrow(props: ArrowProps) {
+  const { mode, show } = props;
+
+  if (mode === 'vertical') {
+    return <Icon className="cat-sub-arrow-right" name="arrow-up-bold" />;
+  }
+
+  if (mode === 'inline') {
+    if (show) return <Icon name="arrow-up-bold" />;
+    else return <Icon name="arrow-down-bold" />;
+  }
+
+  return null;
 }

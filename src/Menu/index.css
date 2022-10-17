@@ -71,3 +71,6 @@
   top: 103%;
   width: 100%;
 }
+.cat-sub-arrow-right {
+  transform: rotate(90deg);
+}
