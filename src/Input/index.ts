@@ -1,4 +1,4 @@
-import InputInner from './Input';
+import InputInner, { InputProps as inputInnerProps } from './Input';
 import TextArea from './Textarea';
 
 type InputInnerProps = typeof InputInner;
@@ -11,3 +11,4 @@ const Input = InputInner as FormProps;
 Input.TextArea = TextArea;
 
 export default Input;
+export type InputProps = inputInnerProps;

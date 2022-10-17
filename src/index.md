@@ -1,6 +1,5 @@
-
 ## quick startttt
 
 ```
-npm 
+
 ```

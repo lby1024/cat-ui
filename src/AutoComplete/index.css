@@ -1,0 +1,15 @@
+.cat-auto-complete {
+  position: relative;
+}
+.cat-auto-ul {
+  box-shadow: 0 3px 6px -4px #0000001f,0 6px 16px #00000014,0 9px 28px 8px #0000000d;
+  padding: 12px;
+  z-index: 99999;
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+.cat-auto-li {
+  line-height: 2em;
+}

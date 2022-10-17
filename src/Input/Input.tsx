@@ -4,7 +4,7 @@ import { IconProps } from '../Icon/Icon';
 import './index.css';
 
 type NativeInputProps = InputHTMLAttributes<HTMLInputElement>;
-interface InputProps extends Omit<NativeInputProps, 'size' | 'prefix'> {
+export interface InputProps extends Omit<NativeInputProps, 'size' | 'prefix'> {
   className?: string;
   disabled?: boolean;
   size?: 'large' | 'small' | 'default';
