@@ -4,9 +4,18 @@ import './index.css';
 import './iconfont.js';
 
 export interface IconProps {
-  name?: string;
   className?: string;
+  /**
+   * 图标名
+   */
+  name?: string;
+  /**
+   * 图标颜色
+   */
   color?: string;
+  /**
+   * 图标大小
+   */
   size?: string;
 }
 

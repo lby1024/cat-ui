@@ -1,15 +1,19 @@
 # Radio
 
+### 基础
+
 ```tsx
 /**
  * title: 基础
  * desc: 最简单的用法。
  */
 import React from 'react';
-import {Radio} from '../index'
+import { Radio } from '../index';
 
-export default () => <Radio.Item >Radio</Radio.Item>;
+export default () => <Radio.Item>Radio</Radio.Item>;
 ```
+
+### 不可用
 
 ```tsx
 /**
@@ -17,13 +21,19 @@ export default () => <Radio.Item >Radio</Radio.Item>;
  * desc: Radio 不可用。
  */
 import React from 'react';
-import {Radio} from '../index'
+import { Radio } from '../index';
 
-export default () => <>
-  <Radio.Item disabled={true} checked={true} >Disabled</Radio.Item>
-  <Radio.Item disabled={true} >Disabled</Radio.Item>
-</>
+export default () => (
+  <>
+    <Radio.Item disabled={true} checked={true}>
+      Disabled
+    </Radio.Item>
+    <Radio.Item disabled={true}>Disabled</Radio.Item>
+  </>
+);
 ```
+
+### 单选组合
 
 ```tsx
 /**
@@ -32,18 +42,25 @@ export default () => <>
  */
 
 import React from 'react';
-import {Radio} from '../index'
+import { Radio } from '../index';
 
-export default () => <>
-  <Radio.Group value='2'>
-    <Radio.Item value='1'>A</Radio.Item>
-    <Radio.Item value='2'>B</Radio.Item>
-    <Radio.Item value='3'>C</Radio.Item>
-  </Radio.Group>
-</>
+export default () => (
+  <>
+    <Radio.Group value="2">
+      <Radio.Item value="1">A</Radio.Item>
+      <Radio.Item value="2">B</Radio.Item>
+      <Radio.Item value="3">C</Radio.Item>
+    </Radio.Group>
+  </>
+);
 ```
-### RadioItem
+
+### API
+
+RadioItem
+
 <API hideTitle src='./RadioItem.tsx'></API>
 
-### RadioGroup
+RadioGroup
+
 <API hideTitle src='./RadioGroup.tsx'></API>
