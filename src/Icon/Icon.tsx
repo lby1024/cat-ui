@@ -21,8 +21,6 @@ export interface IconProps {
 
 const Icon: FC<IconProps> = (props) => {
   const { className, name, size, color } = props;
-  console.log(name, size, color);
-
   const clas = classNames('cat-icon', className, {});
 
   const style: CSSProperties = {

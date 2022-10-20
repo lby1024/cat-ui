@@ -30,7 +30,7 @@ const App = () => {
     <AutoComplete
       fetchSuggestions={fetchSuggestions}
       style={{ width: 300 }}
-      renderItem={renderItem}
+      // renderItem={renderItem}
       prefix={<Icon name="search" />}
     />
   );

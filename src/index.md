@@ -1,5 +1,5 @@
-## quick startttt
+## start
 
 ```
-
+npm i
 ```
