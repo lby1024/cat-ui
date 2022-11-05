@@ -1,16 +1,6 @@
 import classNames from 'classnames';
-import {
-  ChangeEvent,
-  FC,
-  KeyboardEventHandler,
-  ReactElement,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, FC, ReactElement, useRef, useState } from 'react';
 import Input, { InputProps } from '../Input';
-import { debounce } from '../tools/fn';
 import { useDebounceFn } from '../tools/hooks';
 import './index.css';
 import { useClickOut } from './useClickOut';
@@ -28,13 +18,13 @@ export type AutoItemType<T = {}> = {
 
 interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
   className?: string;
-  fetchSuggestions: (str: string) => AutoItemType[] | Promise<AutoItemType[]>;
+  onSearch: (str: string) => AutoItemType[] | Promise<AutoItemType[]>;
   onSelect?: (item: AutoItemType) => void;
   renderItem?: (item: AutoItemType) => ReactElement;
 }
 
 const AutoComplete: FC<AutoCompleteProps> = (props) => {
-  const { className, fetchSuggestions, onSelect, value, renderItem, style, ...restProps } = props;
+  const { className, onSearch, onSelect, value, renderItem, style, ...restProps } = props;
   const [v, setV] = useState(value || '');
   const [list, setList] = useState<AutoItemType[]>([]);
   const [cur, setCur] = useState(-1); // listItem 高亮
@@ -49,7 +39,7 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
       setList([]);
       return;
     }
-    const res = fetchSuggestions(v);
+    const res = onSearch(v);
     if (res instanceof Promise) {
       res.then((result) => setList(result));
     } else {

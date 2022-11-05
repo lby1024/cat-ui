@@ -1,9 +1,25 @@
 /**
- * title: 基础
- * desc: 最简单的用法。
+ * title: 自定义选项
+ * desc: 可以返回自定义的 Option results
  */
+import styled from 'styled-components';
 import { AutoComplete, Icon } from '../index';
 import { Obj } from '../tools/type';
+import { AutoItemType } from './AutoComplete';
+
+type Item = {
+  value: string;
+  results?: number;
+};
+
+const ListItem = styled.div`
+  line-height: 2em;
+  display: flex;
+  justify-content: space-between;
+  span {
+    color: #999;
+  }
+`;
 
 const App = () => {
   async function onSearch(wd: string) {
@@ -12,13 +28,29 @@ const App = () => {
       params: { wd },
       cbName: 'show',
     });
-    res = res.s.map((value: string, index: number) => ({ value, index }));
+    function radom() {
+      let n = Math.random() * 100;
+      return Math.floor(n);
+    }
+    res = res.s.map((value: string) => ({ value, results: radom() }));
 
     return res;
   }
 
+  const renderItem = (item: AutoItemType<Item>) => (
+    <ListItem>
+      {item.value}
+      <span>{item.results} result</span>
+    </ListItem>
+  );
+
   return (
-    <AutoComplete onSearch={onSearch} style={{ width: 300 }} prefix={<Icon name="search" />} />
+    <AutoComplete
+      onSearch={onSearch}
+      style={{ width: 300 }}
+      renderItem={renderItem}
+      addOnAfter={<Icon name="search" />}
+    />
   );
 };
 
