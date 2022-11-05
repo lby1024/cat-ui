@@ -1,6 +1,7 @@
 import { FC, ReactElement } from 'react';
+import { AutoItemType } from './AutoComplete';
 
-interface InputProps {
+interface AutoInputProps {
   /**
    * 是否禁用状态
    */
@@ -25,8 +26,20 @@ interface InputProps {
    * 带有后缀图标的 input
    */
   suffix?: string | ReactElement;
+  /**
+   * 搜索补全项的时候调用
+   */
+  onSearch: (str: string) => AutoItemType[] | Promise<AutoItemType[]>;
+  /**
+   * 被选中时调用，参数为选中项的 value 值
+   */
+  onSelect?: (item: AutoItemType) => void;
+  /**
+   * 自定义选项
+   */
+  renderItem?: (item: AutoItemType) => ReactElement;
 }
 
-const api: FC<InputProps> = (props) => <div></div>;
+const api: FC<AutoInputProps> = (props) => <div></div>;
 
 export default api;
