@@ -8,7 +8,7 @@
  * desc: 按钮类型组要分为 'default' 'pramiry' 'danger' 'link'
  */
 import React from 'react';
-import { Button } from '../index';
+import { Button } from 'cat-ui';
 
 export default () => (
   <div>
@@ -32,7 +32,7 @@ export default () => (
  * desc: 按钮尺寸组要分为 'lg' 'sm' 和默认大小
  */
 import React from 'react';
-import { Button } from '../index';
+import { Button } from 'cat-ui';
 
 export default () => (
   <>
@@ -55,7 +55,7 @@ export default () => (
  * desc: disabled 状态
  */
 import React from 'react';
-import { Button } from '../index';
+import { Button } from 'cat-ui';
 
 export default () => (
   <>

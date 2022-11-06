@@ -32,7 +32,7 @@ const TextArea: FC<TextAreaProps> = (props) => {
   });
 
   return (
-    <span className={clas} data-count={`1/${maxLength}`} style={style}>
+    <span className={clas} data-count={`${value.length}/${maxLength}`} style={style}>
       <textarea
         {...nativAreaProps}
         value={value}

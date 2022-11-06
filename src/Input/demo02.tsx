@@ -3,7 +3,7 @@
  * desc: 用于配置一些固定组合。
  */
 import { CSSProperties } from 'react';
-import { Input, Icon } from '../index';
+import { Input, Icon } from 'cat-ui';
 
 const style: CSSProperties = { width: 300 };
 

@@ -3,7 +3,7 @@
  * desc: 基本使用
  */
 import { CSSProperties } from 'react';
-import { Input } from '../index';
+import { Input } from 'cat-ui';
 
 const style: CSSProperties = { width: 300 };
 const App = () => {

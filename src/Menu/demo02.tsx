@@ -3,7 +3,7 @@
  * desc: 最简单的用法。
  */
 
-import { Menu } from '../index';
+import { Menu } from 'cat-ui';
 
 type DataType = {
   label: string;

@@ -3,7 +3,7 @@
  * desc: 我为 Input 输入框定义了三种尺寸（大、默认、小），高度分别为 40px、32px 和 24px。
  */
 import { CSSProperties } from 'react';
-import { Input, Icon } from '../index';
+import { Input, Icon } from 'cat-ui';
 
 const style: CSSProperties = { width: 300 };
 

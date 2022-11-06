@@ -1,4 +1,4 @@
-import { Form, Input, Button } from '../index';
+import { Form, Input, Button } from 'cat-ui';
 
 const initialValues = {
   username: 'jack',

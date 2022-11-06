@@ -2,11 +2,9 @@
  * title: TextArea
  * desc: 可自动撑高, 设置最大行最小行
  */
-import { CSSProperties } from 'react';
-import {} from '../index';
-import TextArea from './Textarea';
+import { Input } from 'cat-ui';
 
-const style: CSSProperties = { width: 300 };
+const TextArea = Input.TextArea;
 
 const App = () => {
   return (
