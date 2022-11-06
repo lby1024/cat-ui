@@ -1,3 +1,9 @@
+---
+group:
+  title: 通用
+  order: 1
+---
+
 # Button
 
 ### 按钮类型

@@ -1,9 +1,9 @@
 /**
- * title: 基础
+ * title: 通用
  * desc: 最简单的用法。
  */
 import { AutoComplete, Icon } from 'cat-ui';
-import { Obj } from '../tools/type';
+import { Obj } from 'src/tools/type';
 
 const App = () => {
   async function onSearch(wd: string) {

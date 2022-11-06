@@ -1,10 +1,16 @@
+---
+group:
+  title: 表单
+  order: 2
+---
+
 # Radio
 
 ### 基础
 
 ```tsx
 /**
- * title: 基础
+ * title: 通用
  * desc: 最简单的用法。
  */
 import React from 'react';
