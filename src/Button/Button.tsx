@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, forwardRef } from 'react';
 import './index.css';
 
 type nativeProps = React.ButtonHTMLAttributes<HTMLElement> &
@@ -12,7 +12,7 @@ interface ButtonProps extends Partial<nativeProps> {
   btnType?: 'primary' | 'default' | 'danger' | 'link';
 }
 
-const Button: FC<ButtonProps> = (props) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { className, size, disabled, btnType, children, href, ...others } = props;
 
   const clas = classNames('cat-button', {
@@ -31,11 +31,11 @@ const Button: FC<ButtonProps> = (props) => {
   }
 
   return (
-    <button className={clas} disabled={disabled} {...others}>
+    <button className={clas} disabled={disabled} {...others} ref={ref}>
       {children}
     </button>
   );
-};
+});
 
 Button.defaultProps = {
   disabled: false,

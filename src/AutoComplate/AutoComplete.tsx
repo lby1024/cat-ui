@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { ChangeEvent, FC, ReactElement, useRef, useState } from 'react';
 import Input, { InputProps } from '../Input';
-import { useDebounceFn } from '../tools/hooks';
+import { useClickOut, useDebounceFn } from '../tools/hooks';
 import './index.css';
-import { useClickOut } from './useClickOut';
 
 enum keyCode {
   down = 38,

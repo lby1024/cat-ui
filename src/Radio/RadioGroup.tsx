@@ -11,7 +11,7 @@ interface radioGroupProps {
    * @description 选项变化时的回调函数
    */
   onChange?: (v: string) => void;
-  children?: ReactElement;
+  children?: ReactElement[];
 }
 
 const RadioGroup: FC<radioGroupProps> = (props) => {
