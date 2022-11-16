@@ -9,3 +9,7 @@ group:
 <code src='./demo.tsx'></code>
 
 <code src='./demo02.tsx'></code>
+
+### API
+
+<API hideTitle src='./Overlay.tsx'></API>

@@ -11,9 +11,9 @@ const Card = styled.div`
   height: 100px;
   line-height: 100px;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  color: #fff;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
 `;
 const Trigger = styled.div`
   line-height: 50px;

@@ -15,9 +15,21 @@ import './index.css';
 interface OverlayProps {
   className?: string;
   children: ReactElement;
+  /**
+   * 显示隐藏
+   */
   visible: boolean;
+  /**
+   * 显示隐藏回调
+   */
   onVisibleChange: (visible: boolean) => void;
+  /**
+   * 按钮ref
+   */
   btnRef: RefObject<HTMLElement>;
+  /**
+   * 显示位置
+   */
   placement?: 'top' | 'bottom' | 'left' | 'right';
 }
 
