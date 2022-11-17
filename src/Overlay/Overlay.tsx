@@ -39,13 +39,14 @@ const Overlay: FC<OverlayProps> = (props) => {
   const [overLayCb, overLayRef, style] = usePosition(props);
   useClickOut([overLayRef, btnRef], () => onVisibleChange(false));
 
-  const newChildren = React.cloneElement(children, {
+  const child = React.Children.only(children); // 只能传一个child 否则报错
+  const newChild = React.cloneElement(child, {
     ref: overLayCb,
     style,
   });
 
   if (!visible) return null;
-  return ReactDom.createPortal(<div className={clas}>{newChildren}</div>, document.body);
+  return ReactDom.createPortal(<div className={clas}>{newChild}</div>, document.body);
 };
 
 Overlay.defaultProps = {

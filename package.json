@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "cat-ui",
+  "name": "catd",
   "version": "1.0.0",
   "scripts": {
     "start": "dumi dev",

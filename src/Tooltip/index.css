@@ -1,3 +1,44 @@
-.cat-tooltip {
-  
+
+.cat-tooltip .text {
+  padding: 6px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 3px;
+}
+.cat-tooltip .arrow {
+  width: 0;
+  height: 0;
+  border: 6px solid;
+  border-color: orangered skyblue gold yellowgreen;
+}
+/* 上 */
+.cat-tooltip-top .arrow {
+  margin-left: 9px;
+  border-color: #000 transparent transparent transparent;
+}
+/* 下 */
+.cat-tooltip-bottom {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.cat-tooltip-bottom .arrow {
+  border-color: transparent transparent #000 transparent;
+  margin-left: 9px;
+}
+/* 左 */
+.cat-tooltip-left {
+  display: flex;
+  align-items: center;
+}
+.cat-tooltip-left .arrow {
+  border-color: transparent transparent transparent #000;
+}
+/* 右 */
+.cat-tooltip-right {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.cat-tooltip-right .arrow {
+  border-color: transparent #000 transparent transparent;
 }
