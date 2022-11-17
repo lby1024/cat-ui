@@ -3,7 +3,7 @@
  * desc: 可以返回自定义的 Option results
  */
 import styled from 'styled-components';
-import { AutoComplete, Icon } from 'cat-ui';
+import { AutoComplete, Icon } from 'catd';
 import { AutoItemType } from 'src/AutoComplate/AutoComplete';
 import { Obj } from 'src/tools/type';
 

@@ -2,7 +2,7 @@
  * title: TextArea
  * desc: 可自动撑高, 设置最大行最小行
  */
-import { Input } from 'cat-ui';
+import { Input } from 'catd';
 
 const TextArea = Input.TextArea;
 

@@ -27,7 +27,7 @@ export default () => <Radio.Item>Radio</Radio.Item>;
  * desc: Radio 不可用。
  */
 import React from 'react';
-import { Radio } from 'cat-ui';
+import { Radio } from 'catd';
 
 export default () => (
   <>

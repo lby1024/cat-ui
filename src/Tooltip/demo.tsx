@@ -2,7 +2,7 @@
  * title: 通用
  * desc: 最简单的用法。
  */
-import { Tooltip } from 'cat-ui';
+import { Tooltip } from 'catd';
 
 const App = () => {
   return (

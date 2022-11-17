@@ -2,7 +2,7 @@
  * title: 指定显示位置
  * desc: 位置有 top | bottom | left | right
  */
-import { Tooltip, Button } from 'cat-ui';
+import { Tooltip, Button } from 'catd';
 
 const App = () => {
   return (

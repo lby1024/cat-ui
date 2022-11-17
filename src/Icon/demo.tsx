@@ -1,7 +1,7 @@
 /**
  */
 import { FC } from 'react';
-import { Icon } from 'cat-ui';
+import { Icon } from 'catd';
 import styled from 'styled-components';
 
 const Card = styled.div`

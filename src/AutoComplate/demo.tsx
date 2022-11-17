@@ -2,7 +2,7 @@
  * title: 通用
  * desc: 最简单的用法。
  */
-import { AutoComplete, Icon } from 'cat-ui';
+import { AutoComplete, Icon } from 'catd';
 import { Obj } from 'src/tools/type';
 
 const App = () => {

@@ -3,20 +3,20 @@
  * desc: 用于配置一些固定组合。
  */
 import { CSSProperties } from 'react';
-import { Input, Icon } from 'cat-ui';
+import { Input, Icon } from 'catd';
 
 const style: CSSProperties = { width: 300 };
 
 const App = () => {
   return (
     <>
-      <Input addOnBeefore="http://" addOnAfter=".com" defaultValue="cat-ui" style={style} />
+      <Input addOnBeefore="http://" addOnAfter=".com" defaultValue="catd" style={style} />
       <br />
       <br />
       <Input
         addOnBeefore="https://"
         addOnAfter={<Icon name="search" />}
-        defaultValue="cat-ui"
+        defaultValue="catd"
         maxLength={10}
         style={style}
       />
@@ -30,7 +30,7 @@ const App = () => {
       />
       <br />
       <br />
-      <Input prefix="http://" defaultValue="cat-ui" suffix=".com" style={style} />
+      <Input prefix="http://" defaultValue="catd" suffix=".com" style={style} />
       <br />
       <br />
       <Input

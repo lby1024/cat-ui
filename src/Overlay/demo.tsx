@@ -2,7 +2,7 @@
  * title: 基本
  * desc: 最简单的用法。
  */
-import { Overlay, Button } from 'cat-ui';
+import { Overlay, Button } from 'catd';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 

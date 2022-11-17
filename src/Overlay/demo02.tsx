@@ -2,7 +2,7 @@
  * title: 指定显示位置
  * desc: 位置有 top | bottom | left | right
  */
-import { Overlay } from 'cat-ui';
+import { Overlay } from 'catd';
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
