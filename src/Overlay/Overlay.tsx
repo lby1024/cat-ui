@@ -10,10 +10,10 @@ import React, {
 } from 'react';
 import ReactDom from 'react-dom';
 import { CSSProperties } from 'styled-components';
+import Show from '../Show';
 import './index.css';
 
 interface OverlayProps {
-  className?: string;
   children: ReactElement;
   /**
    * 显示隐藏
@@ -34,8 +34,7 @@ interface OverlayProps {
 }
 
 const Overlay: FC<OverlayProps> = (props) => {
-  const { className, children, visible, onVisibleChange, btnRef } = props;
-  const clas = classNames('cat-overlay', className);
+  const { children, visible, onVisibleChange, btnRef } = props;
   const [overLayCb, overLayRef, style] = usePosition(props);
   useClickOut([overLayRef, btnRef], () => onVisibleChange(false));
 
@@ -45,8 +44,12 @@ const Overlay: FC<OverlayProps> = (props) => {
     style,
   });
 
-  if (!visible) return null;
-  return ReactDom.createPortal(<div className={clas}>{newChild}</div>, document.body);
+  return ReactDom.createPortal(
+    <Show duration={500} show={visible}>
+      {newChild}
+    </Show>,
+    document.body,
+  );
 };
 
 Overlay.defaultProps = {
