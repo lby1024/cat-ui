@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, {
   FC,
   ReactElement,
@@ -20,7 +19,7 @@ interface OverlayProps {
    */
   visible: boolean;
   /**
-   * 显示隐藏回调
+   * 点击空白处触发
    */
   onVisibleChange: (visible: boolean) => void;
   /**
