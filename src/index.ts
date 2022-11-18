@@ -11,3 +11,4 @@ export { default as Icon } from './Icon';
 export { default as AutoComplete } from './AutoComplate';
 export { default as Overlay } from './Overlay';
 export { default as Tooltip } from './Tooltip';
+export { default as Show } from './Show';

@@ -11,7 +11,7 @@ group:
 ```tsx
 /**
  * title: 按钮类型
- * desc: 按钮类型组要分为 'default' 'pramiry' 'danger' 'link'
+ * desc: 按钮类型组要分为 'default' 'primary' 'danger' 'link'
  */
 import React from 'react';
 import { Button } from 'catd';
@@ -21,7 +21,7 @@ export default () => (
     <Button className="aaa" btnType="default">
       default
     </Button>
-    <Button btnType="pramiry">pramiry</Button>
+    <Button btnType="primary">pramiry</Button>
     <Button btnType="danger">danger</Button>
     <Button btnType="link" href="http://www.baidu.com">
       link

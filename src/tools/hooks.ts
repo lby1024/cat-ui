@@ -41,6 +41,21 @@ export const useDebounceFn = (cb: Function, delay = 300) => {
   };
 };
 
+export const useThrottle = (value: any, time = 300) => {
+  const [v, setV] = useState(value);
+  const cd = useRef<boolean>(false);
+
+  useEffect(() => {
+    if (!cd.current) {
+      setV(value);
+      cd.current = true;
+      setTimeout(() => (cd.current = false), time);
+    }
+  }, [value]);
+
+  return v;
+};
+
 /**
  * 点击空白处提示列表消失用
  */
