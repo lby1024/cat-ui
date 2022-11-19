@@ -11,16 +11,16 @@ const App = () => {
         <Button>top</Button>
       </Tooltip>
 
-      <Tooltip text="prompt text" placement="bottom">
-        <Button>bottom</Button>
-      </Tooltip>
-
       <Tooltip text="prompt text" placement="left">
         <Button>left</Button>
       </Tooltip>
 
       <Tooltip text="prompt text" placement="right">
         <Button>right</Button>
+      </Tooltip>
+
+      <Tooltip text="prompt text" placement="bottom">
+        <Button>bottom</Button>
       </Tooltip>
     </>
   );

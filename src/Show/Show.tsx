@@ -12,11 +12,12 @@ interface ShowProps {
    * 动画时间
    */
   duration?: number;
+  display?: 'block' | 'inline-block';
   children: ReactNode;
 }
 
 const Show: FC<ShowProps> = (props) => {
-  const { show, children, duration = 300 } = props;
+  const { show, children, duration = 300, display = 'block' } = props;
   const [visible, setVisible] = useState(show);
   const timer = useRef<any>(null);
 
@@ -34,7 +35,10 @@ const Show: FC<ShowProps> = (props) => {
     timer.current = setTimeout(() => setVisible(show), duration);
   }
 
-  const style: CSSProperties = { animationDuration: `${duration / 1000}s` };
+  const style: CSSProperties = {
+    animationDuration: `${duration / 1000}s`,
+    display,
+  };
 
   if (!visible) return null;
   return (
@@ -46,6 +50,7 @@ const Show: FC<ShowProps> = (props) => {
 
 Show.defaultProps = {
   duration: 300,
+  display: 'block',
 };
 
 export default Show;

@@ -44,7 +44,7 @@ const Overlay: FC<OverlayProps> = (props) => {
   });
 
   return ReactDom.createPortal(
-    <Show duration={500} show={visible}>
+    <Show duration={320} show={visible} display="inline-block">
       {newChild}
     </Show>,
     document.body,
@@ -102,6 +102,8 @@ function getPlacement(props: OverlayProps, overLayNode: HTMLElement): CSSPropert
   const { scrollLeft, scrollTop } = document.documentElement;
   const style: CSSProperties = {
     position: 'absolute',
+    top: 0,
+    left: 0,
   };
 
   if (placement === 'bottom') {
