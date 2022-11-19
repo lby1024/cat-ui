@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FC, ReactNode } from 'react';
 import Icon from '../Icon';
 import { MenuModeType } from './MenuGroup';
 import { MenuContext } from './useMenu';
+import Popup from '../Popup';
 
 export interface SubMenuProps {
   className?: string;
@@ -17,84 +18,107 @@ export interface SubMenuProps {
 }
 
 const SubMenu: FC<SubMenuProps> = (props) => {
-  const { className, children, title, padding, path, mode, lv } = props;
+  const { title, padding, path, mode, lv } = props;
   const menuContext = useContext(MenuContext);
-  const clas = classNames('cat-submenu', className);
-  const { onClick, show, ...hover } = useShow(props);
+  const [titleWidth, titleRefCB] = useTitleWidth(); // 获取subTitle 宽度
+  const newChildren = useNewChildren(props); // 克隆children
+  const [click, fold] = useFold(props); // 折叠
+
   const titleClass = classNames('cat-submenu-title', {
     'cat-menu-cur-txt': isCur(menuContext.curPath, path!),
     'cat-menu-cur-bottom': isCur(menuContext.curPath, path!) && mode === 'horizon' && lv === 1,
   });
   const listClass = classNames('cat-submenu-list', {
-    'cat-menu-show-inline': mode === 'inline' && show,
-    'cat-menu-show-right': mode === 'vertical' && show,
-    'cat-menu-show-bottom': mode === 'horizon' && show,
-    'cat-submenu-list-shadow': mode !== 'inline',
+    'cat-submenu-list-shadow': mode !== 'inline', // 是否显示阴影
+    'cat-submenu-list-fold': mode === 'inline' && fold, // 是否折叠
   });
 
-  function newChildren() {
-    const padding = props.padding || 0;
+  const ItemTittle = (
+    <div className={titleClass} style={{ paddingLeft: padding }} ref={titleRefCB} onClick={click}>
+      <span>{title}</span>
+      <Arrow mode={mode} fold={fold} lv={lv!} />
+    </div>
+  );
 
-    return React.Children.map(children, (c, i) => {
-      const child = c as React.FunctionComponentElement<SubMenuProps>;
-      const name = child.props.name || String(i);
-      const paddingLeft = mode === 'inline' ? padding + menuContext.inlineIndent : padding;
+  const Over = (
+    <ul className={listClass} style={{ width: titleWidth }}>
+      {newChildren}
+    </ul>
+  );
 
-      return React.cloneElement(child, {
-        padding: paddingLeft,
-        name,
-        path: `${path}-${name}`,
-        mode: child.props.mode || mode,
-        lv: lv! + 1,
-      });
-    });
+  if (mode === 'inline') {
+    return (
+      <div>
+        {ItemTittle}
+        {Over}
+      </div>
+    );
   }
 
   return (
-    <div className={clas} {...hover}>
-      <div className={titleClass} style={{ paddingLeft: padding }} onClick={onClick}>
-        <span>{title}</span>
-        <Arrow mode={mode} show={show} />
-      </div>
-      <ul className={listClass}>{newChildren()}</ul>
-    </div>
+    <Popup overLay={Over} placement={getPlacement(props)} space={9}>
+      {/* 外面包了一层div是因为ItemTittle会被克隆, 防止 ref 被覆盖 */}
+      <div>{ItemTittle}</div>
+    </Popup>
   );
 };
 SubMenu.displayName = 'SubMenu';
 export default SubMenu;
 
-function useShow(props: SubMenuProps) {
-  const [show, setShow] = useState(false);
-  const timer = useRef<any>(null);
+/**
+ * 克隆children
+ */
+function useNewChildren(props: SubMenuProps) {
+  const { children, mode, path, lv, padding = 0 } = props;
+  const menuContext = useContext(MenuContext);
 
-  return {
-    show,
+  return React.Children.map(children, (c, i) => {
+    const child = c as React.FunctionComponentElement<SubMenuProps>;
+    const name = child.props.name || String(i);
+    const paddingLeft = mode === 'inline' ? padding + menuContext.inlineIndent : padding;
 
-    onClick() {
-      if (props.mode === 'inline') {
-        setShow(!show);
-      }
-    },
-
-    onMouseEnter() {
-      if (props.mode === 'vertical' || props.mode === 'horizon') {
-        timer.current && clearTimeout(timer.current);
-        setShow(true);
-      }
-    },
-
-    onMouseLeave() {
-      if (props.mode === 'vertical' || props.mode === 'horizon') {
-        timer.current = setTimeout(() => setShow(false), 150);
-      }
-    },
-  };
+    return React.cloneElement(child, {
+      padding: paddingLeft,
+      name,
+      path: `${path}-${name}`,
+      mode: child.props.mode || mode,
+      lv: lv! + 1,
+    });
+  });
 }
 /**
- *
- * return true 的条件
+ * 弹框显示位置
+ */
+function getPlacement(props: SubMenuProps) {
+  const { mode, lv } = props;
+  if (mode === 'horizon' && lv! <= 1) return 'bottom';
+  if (mode === 'horizon' && lv! > 1) return 'right';
+  if (mode === 'vertical') return 'right';
+}
+/**
+ * 弹框的宽度
+ */
+function useTitleWidth() {
+  const [w, setW] = useState(0);
+
+  function refCB(node: HTMLDivElement) {
+    if (node) {
+      setW(node.clientWidth);
+      console.log(node.clientWidth);
+    }
+  }
+
+  return [w, refCB] as const;
+}
+
+/**
+ * return true 的条件:
  * 1: path 长度小于 curPath
  * 2: path 与 curPath 一一对应
+ * 例子:
+ * cuarPath = 1-2-3
+ * path = 1-2
+ * return true
  */
 function isCur(curPath: string, path: string) {
   const cur = curPath.split('-');
@@ -105,23 +129,36 @@ function isCur(curPath: string, path: string) {
   }
   return true;
 }
+/**
+ * fold: 折叠
+ */
+function useFold(props: SubMenuProps) {
+  const [fold, setFold] = useState(true);
+  const { mode } = props;
+
+  function click() {
+    if (mode !== 'inline') return;
+    setFold(!fold);
+  }
+
+  return [click, fold] as const;
+}
 
 interface ArrowProps {
   mode: SubMenuProps['mode'];
-  show: boolean;
+  fold: boolean;
+  lv: number;
 }
 
 function Arrow(props: ArrowProps) {
-  const { mode, show } = props;
+  const { mode, fold, lv } = props;
 
-  if (mode === 'vertical') {
-    return <Icon className="cat-sub-arrow-right" name="arrow-up-bold" />;
-  }
+  if (mode === 'horizon' && lv === 1) return null;
 
   if (mode === 'inline') {
-    if (show) return <Icon name="arrow-up-bold" />;
-    else return <Icon name="arrow-down-bold" />;
+    if (fold) return <Icon name="arrow-down-bold" />;
+    else return <Icon name="arrow-up-bold" />;
   }
 
-  return null;
+  return <Icon className="cat-sub-arrow-right" name="arrow-up-bold" />;
 }

@@ -13,18 +13,13 @@
 .cat-menu-item:hover {
   color: var(--blue);
 }
-.cat-submenu {
-  position: relative;
-}
 .cat-submenu-list {
-  display: none;
-  background-color: #fafafa;
+  min-width: 100px;
 }
 .cat-submenu-list-shadow {
   box-shadow: 0 3px 6px -4px #0000001f,0 6px 16px #00000014,0 9px 28px 8px #0000000d;
   background-color: #fff;
   border-radius: 3%;
-  z-index: 999;
 }
 .cat-submenu-title {
   display: flex;
@@ -54,23 +49,9 @@
   color: var(--blue);
 }
 /* 显示方式 */
-.cat-menu-show-inline {
-  display: block;
-}
-.cat-menu-show-right {
-  display: block;
-  position: absolute;
-  left: 103%;
-  top: 0;
-  width: 100%;
-}
-.cat-menu-show-bottom {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 103%;
-  width: 100%;
-}
 .cat-sub-arrow-right {
   transform: rotate(90deg);
+}
+.cat-submenu-list-fold {
+  display: none;
 }

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, ReactNode, useContext, useMemo } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { MenuModeType } from './MenuGroup';
 import { MenuContext } from './useMenu';
 
@@ -18,13 +18,13 @@ const MenuItem: FC<MenuItemProps> = (props) => {
   const menuContext = useContext(MenuContext);
   const isCur = menuContext.curPath === path;
   const clas = classNames('cat-menu-item', className, {
-    'cat-menu-cur-right': mode === 'inline' && isCur,
-    'cat-menu-cur-bg': curBg(),
-    'cat-menu-cur-bottom': mode === 'horizon' && lv === 1 && isCur,
+    'cat-menu-cur-right': mode === 'inline' && isCur, // border-right 高亮
+    'cat-menu-cur-bg': curBg(), // background 高亮
+    'cat-menu-cur-bottom': mode === 'horizon' && lv === 1 && isCur, // border-buttom 高亮
   });
 
   function curBg() {
-    if (menuContext.curPath === path) {
+    if (isCur) {
       if (mode === 'vertical') return true;
       if (mode === 'horizon' && lv! > 1) return true;
     }

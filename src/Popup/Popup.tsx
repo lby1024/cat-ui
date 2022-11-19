@@ -1,21 +1,16 @@
 import { useDebounceFn } from '../tools/hooks';
 import React, { FC, ReactElement, useRef, useState } from 'react';
 import Overlay from '../Overlay';
+import { OverlayProps } from '../Overlay/Overlay';
 import './index.css';
 
-interface PopupProps {
+type OverlayType = Pick<OverlayProps, 'children' | 'placement' | 'space' | 'duration'>;
+
+interface PopupProps extends OverlayType {
   /**
    * 弹框类容
    */
   overLay: any;
-  /**
-   * 弹框位置
-   */
-  placement?: 'top' | 'bottom' | 'left' | 'right';
-  /**
-   * trigger 按钮
-   */
-  children: ReactElement;
   /**
    * 触发事件
    */
@@ -23,17 +18,26 @@ interface PopupProps {
 }
 
 const Popup: FC<PopupProps> = (props) => {
-  const { placement, children, overLay, event } = props;
+  const { placement, children, overLay, event, space } = props;
   const btnRef = useRef(null);
   const [visible, setVisible] = useState(false);
+  const timer = useRef<any>(null);
 
-  const onMouseEnter = useDebounceFn(() => {
-    if (event === 'hover') setVisible(true);
-  }, 100);
+  const onMouseEnter = () => {
+    if (event !== 'hover') return;
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      setVisible(true);
+    }, 100);
+  };
 
-  const onMouseLeave = useDebounceFn(() => {
-    if (event === 'hover') setVisible(false);
-  }, 100);
+  const onMouseLeave = () => {
+    if (event !== 'hover') return;
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      setVisible(false);
+    }, 300);
+  };
 
   const onClick = useDebounceFn(() => {
     if (event === 'click') setVisible(!visible);
@@ -41,14 +45,13 @@ const Popup: FC<PopupProps> = (props) => {
 
   const child = React.Children.only(children); // 只能传一个child 否则报错
   let newChild = React.cloneElement(child, {
-    onMouseEnter,
-    onMouseLeave,
+    ...child.props,
     onClick,
     ref: btnRef,
   });
 
   return (
-    <>
+    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {newChild}
 
       <Overlay
@@ -56,10 +59,11 @@ const Popup: FC<PopupProps> = (props) => {
         onVisibleChange={(vi) => setVisible(vi)}
         btnRef={btnRef}
         placement={placement}
+        space={space}
       >
         {overLay}
       </Overlay>
-    </>
+    </div>
   );
 };
 

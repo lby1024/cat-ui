@@ -1,5 +1,5 @@
 /**
- * title: 通用
+ * title: 基本使用
  * desc: 最简单的用法。
  */
 import { Show, Button, Icon } from 'catd';

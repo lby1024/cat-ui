@@ -1,6 +1,6 @@
 /**
- * title: 通用
- * desc: 最简单的用法。
+ * title: horizon
+ * desc: mode="horizon"
  */
 
 import { Menu } from 'catd';
@@ -11,13 +11,15 @@ const App = () => {
   }
 
   return (
-    // <Menu style={{ width: 'auto' }} onSelect={onSelect} mode="horizon">
-    // <Menu style={{ width: 250 }} onSelect={onSelect} mode="vertical">
-    <Menu style={{ width: 250 }} onSelect={onSelect} mode="inline">
-      <Menu.Item>quick start</Menu.Item>
-      <Menu.Sub title="布局">
-        <Menu.Item>divider</Menu.Item>
-        <Menu.Item>grid</Menu.Item>
+    <Menu style={{ width: 'auto' }} onSelect={onSelect} mode="horizon">
+      <Menu.Item>布局</Menu.Item>
+      <Menu.Sub title="Navigation Two - Submenu">
+        <Menu.Item>Navigation One</Menu.Item>
+        <Menu.Item>Navigation Two</Menu.Item>
+        <Menu.Sub title="Submenu">
+          <Menu.Item>Navigation One</Menu.Item>
+          <Menu.Item>Navigation Two</Menu.Item>
+        </Menu.Sub>
       </Menu.Sub>
       <Menu.Sub title="通用">
         <Menu.Item>button</Menu.Item>

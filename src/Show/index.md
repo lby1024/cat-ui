@@ -6,6 +6,8 @@ group:
 
 # Show
 
+### 基本使用
+
 <code src='./demo.tsx'></code>
 
 ### API

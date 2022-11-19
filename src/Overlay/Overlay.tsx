@@ -12,7 +12,7 @@ import { CSSProperties } from 'styled-components';
 import Show from '../Show';
 import './index.css';
 
-interface OverlayProps {
+export interface OverlayProps {
   children: ReactElement;
   /**
    * 显示隐藏
@@ -30,21 +30,29 @@ interface OverlayProps {
    * 显示位置
    */
   placement?: 'top' | 'bottom' | 'left' | 'right';
+  /**
+   * 按钮和弹框的间距
+   */
+  space?: number;
+  /**
+   * 动画时长
+   */
+  duration?: number;
 }
 
 const Overlay: FC<OverlayProps> = (props) => {
-  const { children, visible, onVisibleChange, btnRef } = props;
+  const { children, visible, onVisibleChange, btnRef, duration } = props;
   const [overLayCb, overLayRef, style] = usePosition(props);
   useClickOut([overLayRef, btnRef], () => onVisibleChange(false));
 
   const child = React.Children.only(children); // 只能传一个child 否则报错
   const newChild = React.cloneElement(child, {
     ref: overLayCb,
-    style,
+    style: { ...child.props.style, ...style },
   });
 
   return ReactDom.createPortal(
-    <Show duration={320} show={visible} display="inline-block">
+    <Show duration={duration} show={visible} display="inline-block">
       {newChild}
     </Show>,
     document.body,
@@ -53,6 +61,8 @@ const Overlay: FC<OverlayProps> = (props) => {
 
 Overlay.defaultProps = {
   placement: 'bottom',
+  space: 0,
+  duration: 320,
 };
 
 export default Overlay;
@@ -93,7 +103,7 @@ function usePosition(props: OverlayProps) {
 }
 
 function getPlacement(props: OverlayProps, overLayNode: HTMLElement): CSSProperties {
-  const { btnRef, placement } = props;
+  const { btnRef, placement, space = 0 } = props;
   if (!btnRef.current) {
     return {};
   }
@@ -107,19 +117,19 @@ function getPlacement(props: OverlayProps, overLayNode: HTMLElement): CSSPropert
   };
 
   if (placement === 'bottom') {
-    style.top = scrollTop + top + height;
+    style.top = scrollTop + top + height + space;
     style.left = scrollLeft + left;
   }
   if (placement === 'right') {
     style.top = scrollTop + top;
-    style.left = scrollLeft + left + width;
+    style.left = scrollLeft + left + width + space;
   }
   if (placement === 'left') {
     style.top = scrollTop + top;
-    style.left = scrollLeft + left - overLayNode.offsetWidth;
+    style.left = scrollLeft + left - overLayNode.offsetWidth - space;
   }
   if (placement === 'top') {
-    style.top = scrollTop + top - overLayNode.offsetHeight;
+    style.top = scrollTop + top - overLayNode.offsetHeight - space;
     style.left = scrollLeft + left;
   }
 

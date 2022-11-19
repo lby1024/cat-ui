@@ -15,30 +15,16 @@ export interface MenuProps {
 }
 
 const Menu: FC<MenuProps> = (props) => {
-  const { className, children, style, inlineIndent, mode } = props;
+  const { className, style, mode } = props;
   const clas = classNames('cat-menu', className, {
     'cat-menu-horizon': mode === 'horizon',
   });
   const menuContext = useMenu(props);
 
-  function newChildren() {
-    return React.Children.map(children, (c, i) => {
-      const child = c as React.FunctionComponentElement<SubMenuProps>;
-
-      return React.cloneElement(child, {
-        padding: inlineIndent,
-        name: child.props.name || String(i),
-        path: child.props.name || String(i),
-        mode: child.props.mode || mode,
-        lv: 1,
-      });
-    });
-  }
-
   return (
     <MenuContext.Provider value={menuContext}>
       <ul className={clas} style={style}>
-        {newChildren()}
+        {newChildren(props)}
       </ul>
     </MenuContext.Provider>
   );
@@ -48,3 +34,22 @@ Menu.defaultProps = {
   mode: 'inline',
 };
 export default Menu;
+
+/**
+ * 克隆children
+ */
+function newChildren(props: MenuProps) {
+  const { children, inlineIndent, mode } = props;
+
+  return React.Children.map(children, (c, i) => {
+    const child = c as React.FunctionComponentElement<SubMenuProps>;
+
+    return React.cloneElement(child, {
+      padding: inlineIndent,
+      name: child.props.name || String(i),
+      path: child.props.name || String(i),
+      mode: child.props.mode || mode,
+      lv: 1,
+    });
+  });
+}

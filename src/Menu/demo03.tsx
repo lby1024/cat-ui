@@ -1,6 +1,6 @@
 /**
- * title: inline
- * desc: mode="inline"
+ * title: vertical
+ * desc: mode="vertical"
  */
 
 import { Menu } from 'catd';
@@ -11,7 +11,7 @@ const App = () => {
   }
 
   return (
-    <Menu style={{ width: 250 }} onSelect={onSelect} mode="inline">
+    <Menu style={{ width: 250 }} onSelect={onSelect} mode="vertical">
       <Menu.Item>quick start</Menu.Item>
       <Menu.Sub title="布局">
         <Menu.Item>divider</Menu.Item>
