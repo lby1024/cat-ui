@@ -1,0 +1,27 @@
+
+/* alert */
+.cat-alert {
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+.cat-alert-message {
+  padding: 0 8px;
+}
+.cat-alert-success {
+  border: 1px solid #b7eb8f;
+  background-color: #f6ffed;
+}
+.cat-alert-warning {
+  border: 1px solid #ffe58f;
+  background-color: #fffbe6;
+}
+.cat-alert-error {
+  border: 1px solid #ffa39e;
+  background-color: #fff1f0;
+}
+.cat-alert-info {
+  background-color: #e6f4ff;
+  border: 1px solid #91caff;
+}
