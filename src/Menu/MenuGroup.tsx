@@ -9,7 +9,10 @@ export interface MenuProps {
   className?: string;
   children?: ReactNode;
   style?: CSSProperties;
-  inlineIndent?: number; // inline 模式的菜单缩进宽度
+  /**
+   * inline 模式的菜单缩进宽度
+   */
+  inlineIndent?: number;
   onSelect?: Function;
   mode?: MenuModeType;
 }

@@ -7,7 +7,13 @@ import { MenuContext } from './useMenu';
 
 export interface SubMenuProps {
   title?: string;
+  /**
+   * subMenu 的唯一标志
+   */
   name?: string;
+  /**
+   * 'inline' | 'vertical' | 'horizon'
+   */
   mode?: MenuModeType;
 }
 

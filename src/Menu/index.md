@@ -6,13 +6,17 @@ group:
 
 # Menu
 
+### horizon
+
 <code src='./demo01.tsx' ></code>
+
+### inline
 
 <code src='./demo02.tsx' ></code>
 
-<code src='./demo03.tsx' ></code>
+### vertical
 
-<code src='./demo04.tsx' ></code>
+<code src='./demo03.tsx' ></code>
 
 ### Menu
 

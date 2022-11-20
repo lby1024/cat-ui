@@ -5,7 +5,7 @@ import { MenuContext } from './useMenu';
 
 interface MenuItemProps {
   /**
-   *
+   * item 的唯一标志
    */
   name?: string;
 }

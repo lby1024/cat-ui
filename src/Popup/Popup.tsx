@@ -1,5 +1,5 @@
 import { useDebounceFn } from '../tools/hooks';
-import React, { FC, ReactElement, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import Overlay from '../Overlay';
 import { OverlayProps } from '../Overlay/Overlay';
 import './index.css';
@@ -44,14 +44,21 @@ const Popup: FC<PopupProps> = (props) => {
   }, 100);
 
   const child = React.Children.only(children); // 只能传一个child 否则报错
-  let newChild = React.cloneElement(child, {
+  const newChild = React.cloneElement(child, {
     ...child.props,
     onClick,
+    onMouseEnter,
+    onMouseLeave,
     ref: btnRef,
+  });
+  const newOverLay = React.cloneElement(overLay, {
+    ...overLay.props,
+    onMouseEnter,
+    onMouseLeave,
   });
 
   return (
-    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <>
       {newChild}
 
       <Overlay
@@ -61,9 +68,9 @@ const Popup: FC<PopupProps> = (props) => {
         placement={placement}
         space={space}
       >
-        {overLay}
+        {newOverLay}
       </Overlay>
-    </div>
+    </>
   );
 };
 
