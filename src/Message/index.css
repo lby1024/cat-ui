@@ -1,6 +1,37 @@
 .cat-message-list {
-  position: absolute;
+  position: fixed;
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
+}
+.cat-msg-item {
+  height: 50px;
+}
+.cat-msg-show {
+  animation: msg-show .2s forwards;
+}
+.cat-msg-hide {
+  animation: msg-hide 1s forwards;
+}
+
+@keyframes msg-show {
+  from {
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    opacity: 1;
+    height: 50px;
+  }  
+}
+
+@keyframes msg-hide {
+  from {
+    opacity: 1;
+    height: 50px;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+  }  
 }

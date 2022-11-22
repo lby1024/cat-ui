@@ -1,17 +1,33 @@
-import classNames from 'classnames';
-import { FC } from 'react';
-import './index.css';
+import { render } from 'react-dom';
+import { debounce } from '../tools/fn';
+import MessageList from './MessageList';
 
-interface MessageProps {
-  className?: string;
+let msgListRoot: HTMLElement;
+const msgList: MsgProps[] = [];
+
+export interface MsgProps {
+  msg: string;
+  type: 'success' | 'warning' | 'error' | 'info';
+  duration?: number;
 }
 
-const Message: FC<MessageProps> = (props) => {
-  const { className } = props;
+const addMsg = (props: MsgProps) => {
+  if (!msgListRoot) {
+    msgListRoot = document.createElement('div');
+    document.body.append(msgListRoot);
+    render(<MessageList />, msgListRoot);
+  }
 
-  const clas = classNames('cat-message', className, {});
-
-  return <div>Message</div>;
+  MessageList.add({
+    ...props,
+    duration: props.duration || 3000,
+    time: new Date().getTime(),
+  });
 };
 
-export default Message;
+export default {
+  success: (msg: string) => addMsg({ type: 'success', msg }),
+  error: (msg: string) => addMsg({ type: 'error', msg }),
+  info: (msg: string) => addMsg({ type: 'info', msg }),
+  warning: (msg: string) => addMsg({ type: 'warning', msg }),
+};

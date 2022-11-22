@@ -2,7 +2,6 @@
 /* alert */
 .cat-alert {
   padding: 8px 12px;
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
 }

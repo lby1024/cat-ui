@@ -4,13 +4,26 @@
  */
 
 import { Message, Button } from 'catd';
-import MessageList from './MessageList';
 
 const App = () => {
+  const success = () => Message.success('MessageList' + new Date().getTime());
+  const error = () => Message.error('MessageList' + new Date().getTime());
+  const warning = () => Message.warning('MessageList' + new Date().getTime());
+  const info = () => Message.info('MessageList' + new Date().getTime());
+
   return (
     <div>
-      <MessageList />
-      <Button>message</Button>
+      <Button onClick={info} btnType="primary">
+        info
+      </Button>
+
+      <Button onClick={success}>success</Button>
+
+      <Button onClick={error} btnType="danger">
+        error
+      </Button>
+
+      <Button onClick={warning}>waring</Button>
     </div>
   );
 };

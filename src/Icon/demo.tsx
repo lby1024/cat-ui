@@ -1,7 +1,7 @@
 /**
  */
 import { FC } from 'react';
-import { Icon } from 'catd';
+import { Icon, Message } from 'catd';
 import styled from 'styled-components';
 
 const Card = styled.div`
@@ -69,6 +69,7 @@ const list = [
 const App: FC = () => {
   function copy(name: string) {
     navigator.clipboard.writeText(name);
+    Message.success(`复制成功:${name} 🎊`);
   }
 
   return (
