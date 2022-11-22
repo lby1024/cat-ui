@@ -25,7 +25,7 @@ const TextArea: FC<TextAreaProps> = (props) => {
   const { className, autoSize, showCount, style, ...nativAreaProps } = props;
   const { maxLength } = nativAreaProps;
   const [value, onChange] = useBind(props);
-  const auto = useAutoSize(props, value);
+  const { areaRef, fakeRef, style: areaStyle } = useAutoSize(props, value);
 
   const clas = classNames('cat-textarea', className, {
     'cat-textarea-count': showCount,
@@ -37,11 +37,11 @@ const TextArea: FC<TextAreaProps> = (props) => {
         {...nativAreaProps}
         value={value}
         onChange={onChange}
-        ref={auto.areaRef}
-        style={auto.style}
+        ref={areaRef}
+        style={areaStyle}
       />
       {/* 这个要隐藏起来 */}
-      <textarea className="cat-area-fake" ref={auto.fakeRef} />
+      <textarea className="cat-area-fake" ref={fakeRef} />
     </span>
   );
 };
@@ -81,6 +81,7 @@ function useAutoSize(props: TextAreaProps, value: string) {
   const areaRef = useRef<any>(null);
   const fakeRef = useRef<any>(null);
 
+  // 最小高度&最大高度
   useMounted(() => {
     if (typeof autoSize === 'object') {
       const { minRow, maxRow } = autoSize;
@@ -100,6 +101,7 @@ function useAutoSize(props: TextAreaProps, value: string) {
     }
   });
 
+  // 自动撑高
   const style = useMemo(() => {
     const fakeNode = fakeRef.current;
     const areaNode = areaRef.current;

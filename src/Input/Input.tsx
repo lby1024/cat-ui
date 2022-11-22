@@ -1,41 +1,38 @@
 import classNames from 'classnames';
-import React, { FC, forwardRef, InputHTMLAttributes, ReactElement } from 'react';
-import { IconProps } from '../Icon/Icon';
+import { forwardRef, InputHTMLAttributes, ReactElement } from 'react';
 import './index.css';
 
 type NativeInputProps = InputHTMLAttributes<HTMLInputElement>;
 export interface InputProps extends Omit<NativeInputProps, 'size' | 'prefix'> {
   className?: string;
-  disabled?: boolean;
   size?: 'large' | 'small' | 'default';
-  addOnBeefore?: string | ReactElement;
+  addOnBefore?: string | ReactElement;
   addOnAfter?: string | ReactElement;
   prefix?: string | ReactElement;
   suffix?: string | ReactElement;
 }
 
 const Input = forwardRef<HTMLElement, InputProps>((props, ref) => {
-  const { className, disabled, size, addOnBeefore, addOnAfter, suffix, prefix, style, ...others } =
-    props;
+  const { className, size, addOnBefore, addOnAfter, suffix, prefix, style, ...others } = props;
 
   const clas = classNames('cat-input', className, {
-    'cat-input-diabled': disabled,
     [`cat-input-${size}`]: size,
   });
-  const leftClass = classNames('cat-input-label cat-input-left');
-  const rightClass = classNames('cat-input-label cat-input-right');
-  const prefixClass = classNames('cat-input-fix cat-input-prefix');
-  const suffixClass = classNames('cat-input-fix cat-input-suffix');
+
+  const Before = <span className="cat-input-label cat-input-before">{addOnBefore}</span>;
+  const After = <span className="cat-input-label cat-input-after">{addOnAfter}</span>;
+  const Prefix = <span className="cat-input-fix cat-input-prefix">{prefix}</span>;
+  const Suffix = <span className="cat-input-fix cat-input-suffix">{suffix}</span>;
 
   return (
     <span className={clas} style={style} ref={ref}>
-      {addOnBeefore && <span className={leftClass}>{addOnBeefore}</span>}
+      {addOnBefore && Before}
       <span className="cat-input-mid">
-        {prefix && <span className={prefixClass}>{prefix}</span>}
+        {prefix && Prefix}
         <input {...others} />
-        {suffix && <span className={suffixClass}>{suffix}</span>}
+        {suffix && Suffix}
       </span>
-      {addOnAfter && <span className={rightClass}>{addOnAfter}</span>}
+      {addOnAfter && After}
     </span>
   );
 });

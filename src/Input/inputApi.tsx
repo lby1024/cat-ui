@@ -2,10 +2,6 @@ import { FC, ReactElement } from 'react';
 
 interface InputProps {
   /**
-   * 是否禁用状态
-   */
-  disabled?: boolean;
-  /**
    * 控件大小
    */
   size?: 'large' | 'small' | 'default';

@@ -31,10 +31,10 @@
   background-color: #fafafa;
   padding: 0 11px;
 }
-.cat-input-left {
+.cat-input-before {
   border-right: 1px solid var(--gray);
 }
-.cat-input-right {
+.cat-input-after {
   border-left: 1px solid var(--gray);
 }
 .cat-input-mid {

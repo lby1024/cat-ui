@@ -10,6 +10,13 @@ export default function useForm() {
   const formRules = useRef<FormRules>({});
   const validator = useRef<Validator | null>(null);
 
+  // values: {} --> {username: undefind}
+  function valuesAddName(name: string) {
+    setValues((v) => {
+      v[name] = undefined;
+      return { ...v };
+    });
+  }
   // formErrors: {username} --> {username, password}
   function setFormItemError(name: string, formItemErrors: string[]) {
     setformErrors((errs) => {
@@ -22,13 +29,6 @@ export default function useForm() {
     setformErrors((errs) => {
       delete errs[name];
       return { ...errs };
-    });
-  }
-  // values: {} --> {username: undefind}
-  function valuesAddName(name: string) {
-    setValues((v) => {
-      v[name] = undefined;
-      return { ...v };
     });
   }
 

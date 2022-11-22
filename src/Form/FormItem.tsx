@@ -17,11 +17,7 @@ interface FormItemProps {
 const FormItem: FC<FormItemProps> = (props) => {
   const { className, children, name, trigger, rules } = props;
   const formApi = useContext(FormContext);
-
-  const clas = classNames({
-    'cat-form-item': true,
-    [className as string]: !!className,
-  });
+  const clas = classNames('cat-form-item', className);
 
   useMounted(() => {
     formApi.regist(name, rules);
