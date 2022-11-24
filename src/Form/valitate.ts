@@ -1,5 +1,27 @@
 import { Obj } from '../tools/type';
 
+/**
+ * 使用:
+ *
+ * 1. 生成校验器时传入规则
+ * cosnt validtor = new Validator({
+ *   username: [{require: true}, ... ],
+ *   paddord: [{max: 12, min: 6}, ...]
+ * })
+ *
+ * 2. 校验所有值
+ * validtor.validate({
+ *  username: 'jack',
+ *  paddword: '123'
+ * })
+ *
+ * 3. 校验某一项
+ * validtor.validateItem('username', {
+ *  username: 'jack',
+ *  paddword: '123'
+ * })
+ */
+
 export type FormErrors = { [name: string]: string[] };
 export type FormRules = { [name: string]: FormItemRule[] };
 export type FormItemRule = {
