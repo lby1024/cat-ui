@@ -1,5 +1,9 @@
 import { Form, Input, Button } from 'catd';
 
+const initialValues = {
+  username: 'jack',
+};
+
 const rules = {
   username: [{ required: true, min: 3, max: 6 }],
   password: [
@@ -7,12 +11,7 @@ const rules = {
     { min: 6, msg: '密码太短了' },
     { max: 12, msg: '密码太长了' },
   ],
-  repassword: [{ required: true, msg: '必填' }, { validator: rePasswordValidate }],
 };
-
-function rePasswordValidate(password: any, values: any) {
-  if (values.password !== password) return '两次密码不一致';
-}
 
 export default () => {
   function onFinish(values: any) {
@@ -24,16 +23,15 @@ export default () => {
   }
 
   return (
-    <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
-      <Form.Item name="username" label="用户名" rules={rules.username}>
+    <Form onFinish={onFinish} onFinishFailed={onFinishFailed} initialValues={initialValues}>
+      <Form.Item name="username" label="用户名" rules={rules.username} trigger="onBlur">
         <Input />
       </Form.Item>
+
       <Form.Item name="password" label="密码" rules={rules.password}>
         <Input />
       </Form.Item>
-      <Form.Item name="repassword" label="重复密码" rules={rules.repassword}>
-        <Input />
-      </Form.Item>
+
       <Form.Item>
         <Button>提交</Button>
       </Form.Item>
