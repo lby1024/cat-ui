@@ -1,3 +1,7 @@
 .cat-upload {
   
 }
+
+.cat-upload-input {
+  display: none;
+}
