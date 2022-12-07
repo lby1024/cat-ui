@@ -2,8 +2,10 @@ import classNames from 'classnames';
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import Button from '../Button';
 import axios, { AxiosProgressEvent } from 'axios';
-import { UploadFile, useFileList } from './useFileList';
+import { useFileList } from './useFileList';
 import './index.css';
+import { UploadFile } from '../interface';
+import UploadList from './UploadList';
 
 export interface UploadProps {
   className?: string;
@@ -18,8 +20,8 @@ export interface UploadProps {
 const Upload: FC<UploadProps> = (props) => {
   const { className, action, defaultFiles, onChange, beforeUpload, onSuccess, onError } = props;
   const inputRef = useRef<HTMLInputElement>(null);
-  const clas = classNames('cat-upload', className, {});
-  const files = useFileList();
+  const clas = classNames('cat-upload', className);
+  const files = useFileList(defaultFiles || []);
 
   const click = () => {
     if (inputRef.current) {
@@ -114,11 +116,7 @@ const Upload: FC<UploadProps> = (props) => {
         <Button btnType="primary">Upload File</Button>
       </div>
       <input className="cat-upload-input" type="file" ref={inputRef} onChange={inputChange} />
-      {files.list.map((file) => (
-        <div key={file.uid}>
-          {file.name}-{file.status}-{file.percent}
-        </div>
-      ))}
+      <UploadList fileList={files.list} onRemove={() => {}} />
     </div>
   );
 };

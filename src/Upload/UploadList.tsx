@@ -1,13 +1,15 @@
 import { FC } from 'react';
-import { UploadFile } from './useFileList';
+import { UploadFile } from '../interface';
 
-interface FileListProps {
+interface UploadListProps {
   fileList: UploadFile[];
-  onRemove: (_file: UploadFile) => void;
+  onRemove: (file: UploadFile) => void;
 }
 
-const FileList: FC<FileListProps> = (props) => {
+const UploadList: FC<UploadListProps> = (props) => {
   const { fileList, onRemove } = props;
+
+  const Card = <div></div>;
 
   return (
     <ul>
@@ -21,3 +23,5 @@ const FileList: FC<FileListProps> = (props) => {
     </ul>
   );
 };
+
+export default UploadList;
