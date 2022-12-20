@@ -8,9 +8,11 @@ interface ModalProps {}
 const Modal = forwardRef<ModalApi, ModalProps>((props, ref) => {
   const [visible, setVisible] = useState(false);
   const [pic, setPic] = useState('');
+  const [name, setName] = useState('');
 
   const show = (file: UploadFile) => {
     setVisible(true);
+    setName(file.name);
     if (file.url) {
       setPic(file.url);
     }
@@ -24,6 +26,7 @@ const Modal = forwardRef<ModalApi, ModalProps>((props, ref) => {
   const hide = () => {
     setVisible(false);
     setPic('');
+    setName('');
   };
 
   useImperativeHandle(ref, () => ({ show }));
@@ -33,6 +36,7 @@ const Modal = forwardRef<ModalApi, ModalProps>((props, ref) => {
   return ReactDom.createPortal(
     <Container onClick={hide}>
       <div className="card" onClick={(e) => e.stopPropagation()}>
+        <div className="name">{name}</div>
         <img src={pic} />
       </div>
     </Container>,
@@ -58,6 +62,9 @@ var Container = styled.div`
     background-color: #fff;
     border-radius: 12px;
     padding: 18px;
+    .name {
+      margin-bottom: 12px;
+    }
     img {
       width: 100%;
     }
