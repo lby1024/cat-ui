@@ -21,7 +21,7 @@ const Tooltip: FC<TooltipProps> = (props) => {
     [`cat-tooltip-${placement}`]: placement,
   });
 
-  const Card = (
+  let Card = (
     <div className={tipClass}>
       <div className="text">{text}</div>
       <div className="arrow"></div>
@@ -29,7 +29,7 @@ const Tooltip: FC<TooltipProps> = (props) => {
   );
 
   return (
-    <Popup overLay={Card} placement={placement}>
+    <Popup overLay={text ? Card : <></>} placement={placement}>
       {children}
     </Popup>
   );

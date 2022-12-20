@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
-import Button from '../Button';
+import { ChangeEvent, FC, useRef } from 'react';
 import axios, { AxiosProgressEvent } from 'axios';
 import { useFileList } from './useFileList';
+import { ModalApi, UploadFile, UploadItemProps } from '../interface';
+import UploadItem from './UploadItem';
 import './index.css';
-import { UploadFile } from '../interface';
-import UploadList from './UploadList';
+import Modal from './Modal';
 
 export interface UploadProps {
   className?: string;
@@ -15,13 +15,16 @@ export interface UploadProps {
   onSuccess?: (data: any, file: File) => void;
   onError?: (err: any, file: File) => void;
   beforeUpload?: (rawFile: File) => boolean | Promise<File>;
+  onRemove?: (file: UploadFile) => void;
 }
 
 const Upload: FC<UploadProps> = (props) => {
-  const { className, action, defaultFiles, onChange, beforeUpload, onSuccess, onError } = props;
+  const { className, action, defaultFiles, onChange, beforeUpload, onSuccess, onError, onRemove } =
+    props;
   const inputRef = useRef<HTMLInputElement>(null);
   const clas = classNames('cat-upload', className);
   const files = useFileList(defaultFiles || []);
+  const modalRef = useRef<ModalApi>(null);
 
   const click = () => {
     if (inputRef.current) {
@@ -63,6 +66,22 @@ const Upload: FC<UploadProps> = (props) => {
         resolve(rawFile);
       }
     });
+  }
+  /**
+   * 删除图片
+   */
+  function remove(file: UploadFile) {
+    files.dele(file);
+    if (onRemove) {
+      onRemove(file);
+    }
+  }
+
+  /**
+   * 预览图片
+   */
+  function preview(file: UploadFile) {
+    modalRef.current?.show(file);
   }
 
   /**
@@ -110,13 +129,26 @@ const Upload: FC<UploadProps> = (props) => {
     }
   }
 
+  const List = files.list.map((file) => {
+    return (
+      <UploadItem
+        type={file.status as UploadItemProps['type']}
+        file={file}
+        key={file.uid}
+        onRemove={remove}
+        onPreview={preview}
+      />
+    );
+  });
+
   return (
     <div className={clas}>
-      <div onClick={click}>
-        <Button btnType="primary">Upload File</Button>
+      <div onClick={click} style={{ display: 'inline-block' }}>
+        <UploadItem type="add" />
       </div>
+      {List}
       <input className="cat-upload-input" type="file" ref={inputRef} onChange={inputChange} />
-      <UploadList fileList={files.list} onRemove={() => {}} />
+      <Modal ref={modalRef} />
     </div>
   );
 };

@@ -4,20 +4,20 @@ group:
   order: 2
 ---
 
-# Input
+# TextArea
 
 ### 基本使用
 
 <code src='./demo.tsx'></code>
 
-### 标签
+### 自动撑高
 
 <code src='./demo02.tsx'></code>
 
-### 三种大小
+### 最大行最小行
 
 <code src='./demo03.tsx'></code>
 
 ### Api
 
-<API hideTitle src='./inputApi.tsx'></API>
+<API hideTitle src='./api.tsx'></API>

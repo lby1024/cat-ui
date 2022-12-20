@@ -12,4 +12,4 @@ group:
 
 ### API
 
-<API hideTitle src='./icon.tsx'>
+<API hideTitle src='./api.tsx'>

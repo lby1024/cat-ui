@@ -14,8 +14,8 @@ const App = () => {
         show: {`${show}`}
       </Button>
 
-      <Show show={show}>
-        <Icon name="chart-bar" size="30" color="#1890ff" />
+      <Show show={show} duration={1000}>
+        <Icon name="cat1" size="300" color="#1890ff" />
       </Show>
     </>
   );
