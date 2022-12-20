@@ -49,9 +49,8 @@ const FormItem: FC<FormItemProps> = (props) => {
   return (
     <div className={clas}>
       <div className="cat-form-label">{props.label}</div>
-      <div className="cat-form-right">
-        <div>{newChildren}</div>
-        <div className="cat-form-msg">{formApi.getFormItemError(name)}</div>
+      <div className="cat-form-right" data-err={formApi.getFormItemError(name)}>
+        {newChildren}
       </div>
     </div>
   );

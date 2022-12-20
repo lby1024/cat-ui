@@ -23,7 +23,12 @@ export default () => {
   }
 
   return (
-    <Form onFinish={onFinish} onFinishFailed={onFinishFailed} initialValues={initialValues}>
+    <Form
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      initialValues={initialValues}
+      style={{ width: 800 }}
+    >
       <Form.Item name="username" label="用户名" rules={rules.username} trigger="onBlur">
         <Input />
       </Form.Item>

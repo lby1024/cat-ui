@@ -1,4 +1,5 @@
 import React, { FC, FormEvent, ReactNode, useRef, useState } from 'react';
+import { CSSProperties } from 'styled-components';
 import { useMounted } from '../tools/hooks';
 import { Obj } from '../tools/type';
 import useForm, { FormContext } from './useForm';
@@ -9,10 +10,11 @@ interface FormProps {
   initialValues?: Obj;
   onFinish?: Function;
   onFinishFailed?: Function;
+  style?: CSSProperties;
 }
 
 const Form: FC<FormProps> = (props) => {
-  const { children, initialValues, onFinish, onFinishFailed } = props;
+  const { children, initialValues, onFinish, onFinishFailed, style } = props;
   const formApi = useForm();
 
   useMounted(() => {
@@ -33,7 +35,7 @@ const Form: FC<FormProps> = (props) => {
   }
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} style={style}>
       <FormContext.Provider value={formApi}>{children}</FormContext.Provider>
     </form>
   );

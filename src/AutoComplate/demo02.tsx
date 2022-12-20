@@ -2,7 +2,7 @@
  * title: 填邮箱
  * desc: 对value进行加工
  */
-import { AutoComplete, Icon } from '../index';
+import { AutoComplete } from 'catd';
 
 const App = () => {
   function onSearch(wd: string) {
