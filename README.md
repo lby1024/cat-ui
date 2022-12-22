@@ -1,33 +1,19 @@
-# dumi-ui
+# ReadMe
 
-## Getting Started
+### 安装
 
-Install dependencies,
-
-```bash
-$ npm i
+```
+npm install antd --save
 ```
 
-Start the dev server,
+### 示例
 
-```bash
-$ npm start
-```
+```jsx
+import { Icon } from 'catd';
 
-Build documentation,
+const App = () => {
+  return <Icon name="cat1" size="30" />;
+};
 
-```bash
-$ npm run docs:build
-```
-
-Run test,
-
-```bash
-$ npm test
-```
-
-Build library via `father`,
-
-```bash
-$ npm run build
+export default App;
 ```
