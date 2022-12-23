@@ -13,3 +13,13 @@ group:
 ### 登录
 
 <code src='./demo02.tsx'></code>
+
+### API
+
+Form
+
+<API hideTitle src='./Form.tsx'></API>
+
+FormItem
+
+<API hideTitle src='./FormItem.tsx'></API>

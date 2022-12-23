@@ -12,7 +12,7 @@ npm install antd --save
 
 ### 示例
 
-```jsx
+```ts
 import { Icon } from 'catd';
 
 const App = () => {

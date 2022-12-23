@@ -27,14 +27,14 @@ export default () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       initialValues={initialValues}
-      style={{ width: 800 }}
+      style={{ width: 600 }}
     >
       <Form.Item name="username" label="用户名" rules={rules.username} trigger="onBlur">
-        <Input />
+        <Input placeholder="username" />
       </Form.Item>
 
       <Form.Item name="password" label="密码" rules={rules.password}>
-        <Input />
+        <Input placeholder="password" />
       </Form.Item>
 
       <Form.Item>

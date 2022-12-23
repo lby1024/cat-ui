@@ -8,9 +8,21 @@ import { FormItemRule } from './valitate';
 interface FormItemProps {
   className?: string;
   children?: ReactElement;
+  /**
+   * label 标签的文本
+   */
   label?: string;
+  /**
+   * 字段名
+   */
   name?: string;
+  /**
+   * 设置收集字段值变更的时机
+   */
   trigger?: 'onChange' | 'onBlur';
+  /**
+   * 校验规则，设置字段的校验逻辑。
+   */
   rules?: FormItemRule[];
 }
 

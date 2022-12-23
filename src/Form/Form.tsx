@@ -7,8 +7,17 @@ import useForm, { FormContext } from './useForm';
 interface FormProps {
   className?: string;
   children?: ReactNode;
+  /**
+   * 表单默认值，只有初始化以及重置时生效
+   */
   initialValues?: Obj;
+  /**
+   * 提交表单且数据验证成功后回调事件
+   */
   onFinish?: Function;
+  /**
+   * 提交表单且数据验证失败后回调事件
+   */
   onFinishFailed?: Function;
   style?: CSSProperties;
 }

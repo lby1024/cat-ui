@@ -24,12 +24,12 @@ export default () => {
   }
 
   return (
-    <Form onFinish={onFinish} onFinishFailed={onFinishFailed} style={{ width: 800 }}>
+    <Form onFinish={onFinish} onFinishFailed={onFinishFailed} style={{ width: 600 }}>
       <Form.Item name="username" label="用户名" rules={rules.username}>
-        <Input />
+        <Input placeholder="username" />
       </Form.Item>
       <Form.Item name="password" label="密码" rules={rules.password}>
-        <Input />
+        <Input placeholder="password" />
       </Form.Item>
       <Form.Item name="repassword" label="重复密码" rules={rules.repassword}>
         <Input />
