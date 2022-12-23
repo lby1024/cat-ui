@@ -2,6 +2,7 @@
 group:
   title: 通用
   order: 1
+filePath: null
 ---
 
 # Button

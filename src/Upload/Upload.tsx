@@ -9,12 +9,33 @@ import Modal from './Modal';
 
 export interface UploadProps {
   className?: string;
+  /**
+   * 上传的地址
+   */
   action: string;
+  /**
+   * 默认已经上传的文件列表
+   */
   defaultFiles?: UploadFile[];
+  /**
+   * 上传文件改变时的回调
+   */
   onChange?: (files: UploadFile[]) => void;
+  /**
+   * 上传成功的回调
+   */
   onSuccess?: (data: any, file: File) => void;
+  /**
+   * 上传失败的回调
+   */
   onError?: (err: any, file: File) => void;
+  /**
+   * 文件开始上传前的回调
+   */
   beforeUpload?: (rawFile: File) => boolean | Promise<File>;
+  /**
+   * 删除文件的回调
+   */
   onRemove?: (file: UploadFile) => void;
 }
 
